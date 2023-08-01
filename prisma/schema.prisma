@@ -15,3 +15,9 @@ model Posts {
   title   String
   content String
 }
+
+model Daily {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  createTime DateTime
+  content    String
+}

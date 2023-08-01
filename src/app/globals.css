@@ -40,3 +40,10 @@
 .app {
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
 }
+
+.quandha {
+  background: #b5b5b5;
+  background: linear-gradient(to left, #b5b5b5 0%, #ff241c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

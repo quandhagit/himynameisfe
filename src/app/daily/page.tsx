@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 
-const MyProfile: React.FC = () => {
+const Daily: React.FC = () => {
   useEffect(() => {
     fetch("/api/posts", { method: "GET" })
       .then((res) => res.json())
@@ -13,4 +13,4 @@ const MyProfile: React.FC = () => {
   return <div>MyProfile</div>;
 };
 
-export default MyProfile;
+export default Daily;

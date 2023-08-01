@@ -1,6 +1,8 @@
+import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import ApolloProviders from "@/apollo/components/ApolloProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +13,6 @@ export const metadata: Metadata = {
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
-  myprofile: React.ReactNode;
 };
 
 const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
@@ -22,8 +23,10 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
           <div className="gradient" />
         </div>
         <main>
-          {props.children}
-          {props.myprofile}
+          <ApolloProviders>
+            <Header />
+            <div className="sm:px-[20%] px-5 py-3">{props.children}</div>
+          </ApolloProviders>
         </main>
       </body>
     </html>
