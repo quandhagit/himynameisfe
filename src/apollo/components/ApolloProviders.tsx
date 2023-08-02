@@ -1,21 +1,14 @@
 "use client";
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql,
-} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
+
+import { client } from "../client/apollo-client";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
 };
 
 const ApolloProviders: React.FC<DashboardLayoutProps> = (props) => {
-  const client = new ApolloClient({
-    uri: "https://flyby-router-demo.herokuapp.com/",
-    cache: new InMemoryCache(),
-  });
   return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
 };
 
