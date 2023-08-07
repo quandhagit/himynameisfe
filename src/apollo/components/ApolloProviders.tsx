@@ -1,15 +1,18 @@
 "use client";
 
-import { ApolloProvider } from "@apollo/client";
-
-import { client } from "../client/apollo-client";
+import { makeClient } from "../client/apollo-client-client-component";
+import { ApolloNextAppProvider } from "@apollo/experimental-nextjs-app-support/ssr";
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
 };
 
 const ApolloProviders: React.FC<DashboardLayoutProps> = (props) => {
-  return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
+  return (
+    <ApolloNextAppProvider makeClient={makeClient}>
+      {props.children}
+    </ApolloNextAppProvider>
+  );
 };
 
 export default ApolloProviders;

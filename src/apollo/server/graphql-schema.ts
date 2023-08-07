@@ -1,5 +1,6 @@
 export const typeDefs = /* GraphQL */ `
   type Daily {
+    id: ID
     createTime: String
     content: String
   }

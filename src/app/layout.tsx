@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ApolloProviders from "@/apollo/components/ApolloProviders";
+import ThemeRegistry from "@/components/styles/ThemeRegistry";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +25,10 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
         </div>
         <main>
           <ApolloProviders>
-            <Header />
-            <div className="sm:px-[20%] px-5 py-3">{props.children}</div>
+            <ThemeRegistry options={{ key: "mui", prepend: true }}>
+              <Header />
+              <div className="sm:px-[20%] px-5 py-3">{props.children}</div>
+            </ThemeRegistry>
           </ApolloProviders>
         </main>
       </body>
