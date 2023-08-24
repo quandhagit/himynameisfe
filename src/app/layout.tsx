@@ -27,7 +27,7 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
           <ApolloProviders>
             <ThemeRegistry options={{ key: "mui", prepend: true }}>
               <Header />
-              <div className="sm:px-[20%] px-5 py-3">{props.children}</div>
+              <div>{props.children}</div>
             </ThemeRegistry>
           </ApolloProviders>
         </main>
