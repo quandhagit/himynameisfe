@@ -1,11 +1,14 @@
 import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import ApolloProviders from "@/apollo/components/ApolloProviders";
 import ThemeRegistry from "@/components/styles/ThemeRegistry";
+import { Poppins } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +30,7 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
           <ApolloProviders>
             <ThemeRegistry options={{ key: "mui", prepend: true }}>
               <Header />
-              <div className="sm:px-[20%] px-5 py-3">{props.children}</div>
+              <div className="sm:px-[20%] px-10 py-10">{props.children}</div>
             </ThemeRegistry>
           </ApolloProviders>
         </main>

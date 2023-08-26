@@ -15,7 +15,7 @@ const Daily: React.FC = async () => {
     <div className="w-full">
       {(dailyList as Daily[]).map((d) => {
         return (
-          <ul>
+          <ul key={d.id}>
             <li>{d.createTime}</li>
             <li>{d.content}</li>
           </ul>
