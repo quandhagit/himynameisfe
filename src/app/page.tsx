@@ -10,12 +10,12 @@ const Home: React.FC = () => {
       <div className="bg-background-main min-h-screen pt-16 sm:px-[10%] xl:px-[20%] px-5 py-3 flex items-center flex-wrap-reverse bg-no-repeat bg-cover">
         <div className="sm:w-1/2">
           <div className="xl:text-6xl sm:text-5xl text-4xl text-blue-950 font-bold">
-            <div className="mb-1.5">Hi, I'm QuanDHA,</div>
+            <div className="mb-1.5">Hi, I&apos;m QuanDHA,</div>
             <div>A Frontend Developer</div>
           </div>
           <div className="mt-7">
             <div className="text-base  text-blue-950">
-              I'm a Vietnamese front‑end developer with <br /> 1.5 years of
+              I&apos;m a Vietnamese front‑end developer with <br /> 1.5 years of
               experience
             </div>
           </div>
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
               My Projects
             </Button>
             <Button variant="outlined" size="large">
-              Let's Talk
+              Let&apos;s Talk
             </Button>
           </div>
           <div className="flex flex-col border-l-red-400 border-l-4 gap-1 border-solid border-0 px-4 mt-10 text-blue-950 xl:mt-32">
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
             <div>
               Hello there! My name is{" "}
               <span className="text-red-600">Dang Hoang Anh Quan</span>. I am a
-              web designer &amp; developer, and I'm very passionate and
+              web designer &amp; developer, and I&apos;m very passionate and
               dedicated to my work.
             </div>
             <div className="mt-8">
@@ -102,7 +102,9 @@ const Home: React.FC = () => {
       <div className="sm:px-[10%] xl:px-[20%] px-5 py-24 bg-[#212121]">
         <div className="text-white">
           <div>- EXPERIENCE</div>
-          <div className="mt-3 text-2xl font-bold">Let's check my journey</div>
+          <div className="mt-3 text-2xl font-bold">
+            Let&apos;s check my journey
+          </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 mt-16 gap-6 w-full">
           <div className="flex flex-col items-center justify-center py-20 bg-white border-gray-300 border rounded">
