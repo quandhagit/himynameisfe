@@ -28,7 +28,7 @@ const Header: React.FC = () => {
             className="no-underline text-black hover:text-red-600"
             href={"/"}
           >
-            Experienct
+            Experience
           </Link>
           <Link
             className="no-underline text-black hover:text-red-600"

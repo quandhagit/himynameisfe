@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.app {
+  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;
@@ -59,13 +63,20 @@ body::-webkit-scrollbar-thumb
   opacity: 0.15;
 }
 
-.app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
-}
-
 .quandha {
   background: #b5b5b5;
   background: linear-gradient(to left, #b5b5b5 0%, #ff241c 100%);
+  background-clip: unset; 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .snake-grid {
+    display:grid;
+    grid-auto-flow: row dense;
+  }
+  
+  .snake-grid > div:nth-child(4n + 3) { grid-column:2; }
+  .snake-grid > div:nth-child(4n + 4) { grid-column:1; }
 }
