@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <div className="lg:flex max-w-[40%] gap-6 w-3/5 hidden justify-between font-bold">
           <Link
             className="no-underline text-black hover:text-red-600"
-            href={"/"}
+            href="#first-section"
           >
             Home
           </Link>
