@@ -1,7 +1,14 @@
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import ContactInfo from "@/feature/home/contact/ContactInfo";
 import React from "react";
+
+const contractInfoData = {
+  phoneNumber: "0877617200",
+  email: "quandha1009@gmail.com",
+  address: "36 Khue My Dong 5, Ngu Hanh Son, Danang",
+};
 
 const Footer = () => {
   return (
@@ -15,11 +22,11 @@ const Footer = () => {
                 <span className="text-white bg-red-700 px-3 rounded">DHA</span>
               </div>
             </div>
-            <div className="flex flex-col border-l-red-400 border-l-4 gap-1 border-solid border-0 px-4 mt-5 text-blue-950">
-              <div>0877617200</div>
-              <div>quandha1009@gmail.com</div>
-              <div>36 Khue My Dong 5, Ngu Hanh Son, Danang</div>
-            </div>
+            <ContactInfo
+              phoneNumber={contractInfoData.phoneNumber}
+              email={contractInfoData.email}
+              address={contractInfoData.address}
+            />
           </div>
           <div className="flex flex-col lg:w-2/5 w-full lg:items-end">
             <div className="flex gap-4">

@@ -10,10 +10,12 @@ const Daily: React.FC = async () => {
   const client = getClient();
   const {
     data: { dailyList },
-  } = await client.query({ query: GET_DAILY });
+  }: { data: { dailyList: Daily[] } } = await client.query({
+    query: GET_DAILY,
+  });
   return (
     <div className="w-full">
-      {(dailyList as Daily[]).map((d) => {
+      {dailyList.map((d) => {
         return (
           <ul key={d.id}>
             <li>{d.createTime}</li>

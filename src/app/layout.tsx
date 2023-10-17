@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import ApolloProviders from "@/apollo/components/ApolloProviders";
-import ThemeRegistry from "@/components/styles/ThemeRegistry";
+import ThemeRegistry from "@/components/themeCustom/ThemeRegistry";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/Footer";
 
