@@ -33,8 +33,8 @@ const ProjectCard = ({
   }, [startDate, endDate]);
 
   return (
-    <div className="rounded relative h-[420px] overflow-hidden shadow-md">
-      <div className="absolute top-8 right-0 py-2 px-3 rounded-l-xl bg-green-600 opacity-80 text-white font-bold">
+    <div className="rounded relative h-auto min-h-[400px] overflow-hidden shadow-md">
+      <div className="absolute top-8 right-0 py-1 px-2 rounded-l-xl bg-green-600 opacity-80 text-white font-bold">
         {workingTime}
       </div>
       <Image

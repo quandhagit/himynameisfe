@@ -18,7 +18,7 @@ const Header: React.FC = () => {
             <span className="text-white bg-red-700 px-3 rounded">DHA</span>
           </div>
         </Link>
-        <div className="lg:flex max-w-[40%] gap-6 w-3/5 hidden justify-between font-bold">
+        <div className="lg:flex xl:max-w-[50%] gap-6 w-3/5 hidden justify-between font-bold">
           <Link
             className="no-underline text-black hover:text-red-600"
             href={"/"}

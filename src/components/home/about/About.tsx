@@ -22,7 +22,7 @@ const About = () => {
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 text-blue-950"
     >
       <div className="flex justify-between flex-wrap">
-        <div className="lg:w-2/5 min-w-max pr-5 mb-10">
+        <div className="lg:w-2/5 pr-5 mb-10">
           <div>- NICE TO MEET YOU!</div>
           <NameAndRole fullName={data.fullName} role={data.role} />
         </div>
