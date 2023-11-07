@@ -3,17 +3,13 @@ import { Workspace } from "@/redux/home/workspace/workspaceSlice";
 import React, { useMemo } from "react";
 
 type WorkspaceDialogProps = {
-  workspace: Workspace | null;
+  workspace: Workspace;
   isOpen?: boolean;
   onClose?: () => void;
 };
 
 const WorkspaceDialog: React.FC<WorkspaceDialogProps> = (props) => {
   const { workspace, isOpen = false, onClose } = props;
-
-  if (!workspace) {
-    return;
-  }
 
   const { startDate, endDate, company, role, description, image } = workspace;
 

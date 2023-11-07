@@ -4,17 +4,13 @@ import { Workspace } from "@/redux/home/workspace/workspaceSlice";
 import React, { useMemo } from "react";
 
 type ProjectDialogProps = {
-  project: Project | null;
+  project: Project;
   isOpen?: boolean;
   onClose?: () => void;
 };
 
 const ProjectDialog: React.FC<ProjectDialogProps> = (props) => {
   const { project, isOpen = false, onClose } = props;
-
-  if (!project) {
-    return;
-  }
 
   const {
     startDate,

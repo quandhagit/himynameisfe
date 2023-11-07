@@ -27,11 +27,13 @@ const Project = () => {
         <div className="mt-3 text-2xl font-bold">Recent completed works</div>
       </div>
       <ProjectList />
-      <ProjectDialog
-        project={selectedProject}
-        onClose={handleCloseDialog}
-        isOpen={!!selectedProject}
-      />
+      {selectedProject && (
+        <ProjectDialog
+          project={selectedProject}
+          onClose={handleCloseDialog}
+          isOpen={!!selectedProject}
+        />
+      )}
     </div>
   );
 };

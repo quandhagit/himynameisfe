@@ -40,11 +40,13 @@ const Workspace = () => {
         </div>
       </div>
       <WorkspaceList />
-      <WorkspaceDialog
-        workspace={selectedWorkspace}
-        onClose={handleCloseDialog}
-        isOpen={!!selectedWorkspace}
-      />
+      {selectedWorkspace && (
+        <WorkspaceDialog
+          workspace={selectedWorkspace}
+          onClose={handleCloseDialog}
+          isOpen={!!selectedWorkspace}
+        />
+      )}
     </div>
   );
 };
