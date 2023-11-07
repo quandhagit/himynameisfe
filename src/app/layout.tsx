@@ -5,6 +5,7 @@ import ApolloProviders from "@/apollo/components/ApolloProviders";
 import ThemeRegistry from "@/components/themeCustom/ThemeRegistry";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/Footer";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
           <ApolloProviders>
             <ThemeRegistry options={{ key: "mui", prepend: true }}>
               <Header />
+              <Sidebar />
               <div className="selection:bg-red-300">{props.children}</div>
               <Footer />
             </ThemeRegistry>
