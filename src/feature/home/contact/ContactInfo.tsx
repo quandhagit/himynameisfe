@@ -6,7 +6,11 @@ type ContactInfoProps = {
   address: string;
 };
 
-const ContactInfo = ({ phoneNumber, email, address }: ContactInfoProps) => {
+const ContactInfo: React.FC<ContactInfoProps> = ({
+  phoneNumber,
+  email,
+  address,
+}) => {
   return (
     <div className="flex flex-col border-l-red-400 border-l-4 gap-1 border-solid border-0 px-4 mt-10 text-blue-950">
       <div>{phoneNumber}</div>

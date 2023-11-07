@@ -14,8 +14,8 @@ const Header: React.FC = () => {
       <div className="flex items-center gap-3 justify-between w-full">
         <Link className="text-3xl font-bold mr-2 no-underline" href={"/"}>
           <div className="text-red-700 font-mono">
-            Quan
-            <span className="text-white bg-red-700 px-3 rounded">DHA</span>
+            Hi
+            <span className="text-white bg-red-700 px-3 rounded">MyNameIs</span>
           </div>
         </Link>
         <div className="lg:flex xl:max-w-[50%] gap-6 w-3/5 hidden justify-between font-bold">

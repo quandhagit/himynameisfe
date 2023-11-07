@@ -1,23 +1,23 @@
+import { Workspace } from "@/redux/home/workspace/workspaceSlice";
 import clsx from "clsx";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 
-type ExperienceCardProps = {
-  startDate: string;
-  endDate: string;
-  company: string;
-  role: string;
-  description: string;
+type WorkspaceCardProps = {
+  workspace: Workspace;
   index: number;
+  onClick: (id: string) => void;
 };
 
-const ExperienceCard = ({
-  startDate,
-  endDate,
-  company,
-  role,
-  description,
-  index,
-}: ExperienceCardProps) => {
+const WorkspaceCard = ({ workspace, index, onClick }: WorkspaceCardProps) => {
+  const {
+    id: workspaceId,
+    startDate,
+    endDate,
+    company,
+    role,
+    description,
+  } = workspace;
+
   const workDateRange = useMemo(() => {
     if (!startDate && !endDate) return "";
 
@@ -28,8 +28,12 @@ const ExperienceCard = ({
     return startDate + " - " + endDate;
   }, [startDate, endDate]);
 
+  const handleCardClick = useCallback(() => {
+    onClick(workspaceId);
+  }, [workspaceId]);
+
   return (
-    <div className="relative">
+    <div className="relative hover:z-10">
       {index !== 0 && (
         <div
           className={clsx(
@@ -44,7 +48,10 @@ const ExperienceCard = ({
         ></div>
       )}
 
-      <div className="flex flex-col p-6 bg-white border-gray-300 border-solid border rounded h-[202px]">
+      <div
+        className="flex flex-col p-6 bg-white border-gray-300 border-solid border rounded h-[202px] hover:scale-105 transition z-10 cursor-pointer"
+        onClick={handleCardClick}
+      >
         <div className="flex justify-between w-full">
           <div className="text-yellow-600">{workDateRange}</div>
           <div className="">{company}</div>
@@ -58,4 +65,4 @@ const ExperienceCard = ({
   );
 };
 
-export default ExperienceCard;
+export default WorkspaceCard;
