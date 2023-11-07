@@ -1,7 +1,7 @@
 import CommonDialog from "@/components/common/CommonDialog";
 import React, { useMemo } from "react";
 
-type ExperienceDialogProps = {
+type WorkspaceDialogProps = {
   imageUrl?: string;
   company: string;
   role: string;
@@ -12,7 +12,7 @@ type ExperienceDialogProps = {
   endDate: string;
 };
 
-const ExperienceDialog: React.FC<ExperienceDialogProps> = (props) => {
+const WorkspaceDialog: React.FC<WorkspaceDialogProps> = (props) => {
   const {
     imageUrl,
     role,
@@ -35,7 +35,7 @@ const ExperienceDialog: React.FC<ExperienceDialogProps> = (props) => {
   }, [startDate, endDate]);
 
   return (
-    <CommonDialog isOpen={isOpen} imageUrl={imageUrl}>
+    <CommonDialog isOpen={isOpen} imageUrl={imageUrl} onClose={onClose}>
       <div className="flex gap-5 w-full mt-4">
         <div className="text-yellow-600">{workDateRange}</div>
         <div className="">{company}</div>
@@ -46,4 +46,4 @@ const ExperienceDialog: React.FC<ExperienceDialogProps> = (props) => {
   );
 };
 
-export default ExperienceDialog;
+export default WorkspaceDialog;

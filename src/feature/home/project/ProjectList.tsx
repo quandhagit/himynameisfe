@@ -33,7 +33,7 @@ const dumbData = [
   },
 ];
 
-const ExperienceList = () => {
+const WorkspaceList = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-14 mt-16 w-full">
@@ -48,4 +48,4 @@ const ExperienceList = () => {
   );
 };
 
-export default ExperienceList;
+export default WorkspaceList;
