@@ -18,8 +18,10 @@ const Footer = () => {
           <div className="lg:w-3/5 mb-10 lg:mb-2 pr-8">
             <div className="text-4xl font-bold mr-2 no-underline">
               <div className="text-red-700 font-mono">
-                Quan
-                <span className="text-white bg-red-700 px-3 rounded">DHA</span>
+                Hi
+                <span className="text-white bg-red-700 px-3 rounded">
+                  MyNameIs
+                </span>
               </div>
             </div>
             <ContactInfo

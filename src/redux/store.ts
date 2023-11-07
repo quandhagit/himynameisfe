@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import workspaceSlice from "./home/workspace/workspaceSlice";
+import projectSlice from "./home/project/projectSlice";
 
 export const store = configureStore({
   reducer: {
     workspaceSlice,
+    projectSlice,
   },
 });
 

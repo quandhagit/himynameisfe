@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import WorkspaceList from "@/feature/home/workspace/WorkspaceList";
 import { HEADER_IDS } from "../../Header";
-import WorkspaceDialog from "./WorkspaceDialog";
+import WorkspaceDialog from "../../../feature/home/workspace/WorkspaceDialog";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectWorkspace } from "@/redux/home/workspace/workspaceSlice";
 import { DUMB_IMAGE_URL } from "@/constant/common";
@@ -40,18 +40,11 @@ const Workspace = () => {
         </div>
       </div>
       <WorkspaceList />
-      {selectedWorkspace && (
-        <WorkspaceDialog
-          description={selectedWorkspace.description}
-          company={selectedWorkspace.company}
-          startDate={selectedWorkspace.startDate}
-          endDate={selectedWorkspace.endDate}
-          role={selectedWorkspace.role}
-          isOpen={!!selectedWorkspace}
-          imageUrl={selectedWorkspace.image}
-          onClose={handleCloseDialog}
-        />
-      )}
+      <WorkspaceDialog
+        workspace={selectedWorkspace}
+        onClose={handleCloseDialog}
+        isOpen={!!selectedWorkspace}
+      />
     </div>
   );
 };

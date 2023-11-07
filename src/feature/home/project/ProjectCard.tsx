@@ -1,24 +1,28 @@
 import { DUMB_IMAGE_URL } from "@/constant/common";
+import { Project } from "@/redux/home/project/projectSlice";
 import clsx from "clsx";
 import moment from "moment";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 
 type ProjectCardProps = {
-  startDate: string;
-  endDate: string;
-  projectName: string;
-  description: string;
-  technologies: string[];
+  project: Project;
+  onClick: (id: string) => void;
 };
 
-const ProjectCard = ({
-  startDate,
-  endDate,
-  projectName,
-  description,
-  technologies,
-}: ProjectCardProps) => {
+const ProjectCard: React.FC<ProjectCardProps> = (props) => {
+  const { project, onClick } = props;
+
+  const {
+    startDate,
+    endDate,
+    projectName,
+    description,
+    technologies,
+    image,
+    id: projectId,
+  } = project;
+
   const workingTime = useMemo(() => {
     if (!startDate && !endDate) return "";
     const startDateTime = moment(startDate).startOf("month");
@@ -33,14 +37,21 @@ const ProjectCard = ({
     return duration + " months";
   }, [startDate, endDate]);
 
+  const handleSelectProject = useCallback(() => {
+    onClick(projectId);
+  }, [projectId]);
+
   return (
-    <div className="rounded relative h-auto min-h-[400px] overflow-hidden shadow-md  hover:-translate-y-3 transition cursor-pointer">
+    <div
+      className="rounded relative h-auto min-h-[400px] overflow-hidden shadow-md  hover:-translate-y-3 transition cursor-pointer"
+      onClick={handleSelectProject}
+    >
       <div className="absolute top-8 right-0 py-1 px-2 rounded-l-xl bg-green-600 opacity-80 text-white font-bold">
         {workingTime}
       </div>
       <Image
         alt="abc"
-        src={DUMB_IMAGE_URL}
+        src={image}
         width={0}
         height={0}
         sizes="100vw"

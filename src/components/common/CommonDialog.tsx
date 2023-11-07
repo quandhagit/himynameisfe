@@ -25,10 +25,11 @@ const CommonDialog: React.FC<CommonDialogProps> = (props) => {
       PaperProps={{
         sx: {
           maxHeight: "80vh",
+          paddingY: "2rem",
         },
       }}
     >
-      <div className="p-8">
+      <div className="w-full h-full overflow-y-auto px-8">
         {imageUrl && (
           <Image
             alt="common"
