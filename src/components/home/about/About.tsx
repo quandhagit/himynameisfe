@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { HEADER_IDS } from "../../Header";
 import NameAndRole from "@/feature/home/about/NameAndRole";
+import { HEADER_IDS } from "@/constant/common";
 
 const data = {
   fullName: "Dang Hoang Anh Quan",

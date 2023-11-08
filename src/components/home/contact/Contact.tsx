@@ -1,8 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import React from "react";
-import { HEADER_IDS } from "../../Header";
 import ContactContent from "@/feature/home/contact/ContactContent";
 import ContactInputs from "@/feature/home/contact/ContactInputs";
+import { HEADER_IDS } from "@/constant/common";
 
 const Contact = () => {
   return (

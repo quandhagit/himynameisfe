@@ -3,10 +3,10 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import ProjectList from "@/feature/home/project/ProjectList";
-import { HEADER_IDS } from "../../Header";
 import ProjectDialog from "@/feature/home/project/ProjectDialog";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectProject } from "@/redux/home/project/projectSlice";
+import { HEADER_IDS } from "@/constant/common";
 
 const Project = () => {
   const dispatch = useDispatch<AppDispatch>();

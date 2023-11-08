@@ -3,11 +3,10 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import WorkspaceList from "@/feature/home/workspace/WorkspaceList";
-import { HEADER_IDS } from "../../Header";
 import WorkspaceDialog from "../../../feature/home/workspace/WorkspaceDialog";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectWorkspace } from "@/redux/home/workspace/workspaceSlice";
-import { DUMB_IMAGE_URL } from "@/constant/common";
+import { DUMB_IMAGE_URL, HEADER_IDS } from "@/constant/common";
 
 const dumb = {
   id: 1,

@@ -25,8 +25,8 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
   const workingTime = useMemo(() => {
     if (!startDate && !endDate) return "";
-    const startDateTime = moment(startDate).startOf("month");
-    const endDateTime = moment(endDate).startOf("month");
+    const startDateTime = moment(startDate, "MM-DD-YYYY").startOf("month");
+    const endDateTime = moment(endDate, "MM-DD-YYYY").startOf("month");
     const duration = endDateTime.diff(startDateTime, "months");
     if (duration === 0) {
       return "less than 1 month";

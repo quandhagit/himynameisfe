@@ -1,18 +1,26 @@
-import { Button } from "@mui/material";
+import { HEADER_IDS } from "@/constant/common";
+import { Button, Drawer } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
+import clsx from "clsx";
 
-export const HEADER_IDS = {
-  ABOUT: "about",
-  EXPERIENCE: "experience",
-  PROJECT: "project",
-  CONTACT: "Contact",
-};
-
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ open: boolean; onClose: () => void }> = ({
+  open,
+  onClose,
+}) => {
   return (
-    <>
-      <div className="h-screen w-screen flex justify-end items-center absolute bg-white z-10 opacity-50 lg:hidden"></div>
-      <div className="flex flex-col fixed h-full items-end gap-3 w-2/3 z-20 right-0 bg-white p-4 lg:hidden">
+    <Drawer anchor={"right"} open={open} onClose={onClose}>
+      <div
+        className={clsx(
+          "flex flex-col items-end gap-3 w-60 sm:w-72 p-4 transition"
+        )}
+      >
+        <button
+          className="rounded-full bg-transparent border-none hover:bg-red-100 w-10 h-10 cursor-pointer"
+          onClick={onClose}
+        >
+          <CloseIcon />
+        </button>
         <Link className="no-underline text-black hover:text-red-600" href={"/"}>
           Home
         </Link>
@@ -49,12 +57,14 @@ const Sidebar: React.FC = () => {
         <Button
           variant="contained"
           size="large"
-          className="bg-black hover:bg-black hover:opacity-80"
+          sx={{
+            backgroundColor: "black",
+          }}
         >
           Login
         </Button>
       </div>
-    </>
+    </Drawer>
   );
 };
 
