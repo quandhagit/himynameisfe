@@ -6,6 +6,7 @@ import About from "@/components/home/about/About";
 import Workspace from "@/components/home/workspace/Workspace";
 import Project from "@/components/home/project/Project";
 import Contact from "@/components/home/contact/Contact";
+import HomeTableOfContents from "@/components/home/HomeTableOfContents";
 
 const Home: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
       <Workspace />
       <Project />
       <Contact />
+      <HomeTableOfContents />
     </div>
   );
 };
