@@ -34,7 +34,9 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
             <ReduxProvider>
               <ThemeRegistry options={{ key: "mui", prepend: true }}>
                 <Header />
-                <div className="selection:bg-red-300">{props.children}</div>
+                <div className="selection:bg-red-300 min-h-screen">
+                  {props.children}
+                </div>
                 <Footer />
               </ThemeRegistry>
             </ReduxProvider>

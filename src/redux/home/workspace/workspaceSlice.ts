@@ -65,7 +65,6 @@ export const workspaceSlice = createSlice({
       }
       const selectedWorkspace =
         state.workspaceList.find((w) => w.id === action.payload) || null;
-      console.log(selectedWorkspace);
       return { ...state, selectedWorkspace: selectedWorkspace };
     },
   },

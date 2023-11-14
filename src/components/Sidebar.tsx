@@ -1,13 +1,15 @@
-import { HEADER_IDS } from "@/constant/common";
+import { HOME_MENU_IDS } from "@/constant/home/common";
 import { Button, Drawer } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Link from "next/link";
 import clsx from "clsx";
+import { ReactNode } from "react";
 
-const Sidebar: React.FC<{ open: boolean; onClose: () => void }> = ({
-  open,
-  onClose,
-}) => {
+const Sidebar: React.FC<{
+  open: boolean;
+  onClose: () => void;
+  tabElements: ReactNode;
+}> = ({ open, onClose, tabElements }) => {
   return (
     <Drawer anchor={"right"} open={open} onClose={onClose}>
       <div
@@ -21,38 +23,13 @@ const Sidebar: React.FC<{ open: boolean; onClose: () => void }> = ({
         >
           <CloseIcon />
         </button>
-        <Link className="no-underline text-black hover:text-red-600" href={"/"}>
-          Profile
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"#" + HEADER_IDS.ABOUT}
-        >
-          Setting
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"#" + HEADER_IDS.EXPERIENCE}
-        >
-          Dashboard
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"/daily"}
-        >
-          Daily
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"#" + HEADER_IDS.EXPERIENCE}
-        >
-          Search
-        </Link>
+        {tabElements}
         <Button
           variant="contained"
           size="large"
           sx={{
             backgroundColor: "black",
+            ":hover": { opacity: 0.8, backgroundColor: "black" },
           }}
         >
           Login

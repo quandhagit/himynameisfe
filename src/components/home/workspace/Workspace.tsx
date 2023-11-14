@@ -6,7 +6,7 @@ import WorkspaceList from "@/feature/home/workspace/WorkspaceList";
 import WorkspaceDialog from "../../../feature/home/workspace/WorkspaceDialog";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectWorkspace } from "@/redux/home/workspace/workspaceSlice";
-import { DUMB_IMAGE_URL, HEADER_IDS } from "@/constant/common";
+import { HOME_MENU_IDS } from "@/constant/home/common";
 
 const dumb = {
   id: 1,
@@ -29,7 +29,7 @@ const Workspace = () => {
 
   return (
     <section
-      id={HEADER_IDS.EXPERIENCE}
+      id={HOME_MENU_IDS.EXPERIENCE}
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 bg-[#212121]"
     >
       <div className="text-white">

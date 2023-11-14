@@ -2,12 +2,12 @@ import { Button, TextField } from "@mui/material";
 import React from "react";
 import ContactContent from "@/feature/home/contact/ContactContent";
 import ContactInputs from "@/feature/home/contact/ContactInputs";
-import { HEADER_IDS } from "@/constant/common";
+import { HOME_MENU_IDS } from "@/constant/home/common";
 
 const Contact = () => {
   return (
     <section
-      id={HEADER_IDS.CONTACT}
+      id={HOME_MENU_IDS.CONTACT}
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 text-blue-950 bg-red-200"
     >
       <div>

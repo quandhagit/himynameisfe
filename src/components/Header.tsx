@@ -4,14 +4,57 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "./Sidebar";
-import { useEffect, useState } from "react";
-import { HEADER_IDS } from "@/constant/common";
+import { useEffect, useMemo, useState } from "react";
+import { HOME_MENU_IDS } from "@/constant/home/common";
 import useMatchMedia from "@/utils/useMatchMedia";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 const Header: React.FC = () => {
+  const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
+  const pathname = usePathname();
+
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
-  const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
+  const isProfilePage = pathname === "/";
+
+  const tabElements = useMemo(() => {
+    return (
+      <>
+        <Link className="no-underline text-black hover:text-red-600" href={"/"}>
+          Profile
+        </Link>
+        <Link
+          className="no-underline text-black hover:text-red-600"
+          href={"/settings"}
+        >
+          Settings
+        </Link>
+        <Link
+          className="no-underline text-black hover:text-red-600"
+          href={"/settings"}
+        >
+          Dashboard
+        </Link>
+        <Link
+          className="no-underline text-black hover:text-red-600"
+          href={"/daily"}
+        >
+          Daily
+        </Link>
+        <Link
+          className="no-underline text-black hover:text-red-600"
+          href={"#" + HOME_MENU_IDS.EXPERIENCE}
+        >
+          Search
+        </Link>
+      </>
+    );
+  }, [HOME_MENU_IDS]);
+
+  const handleCloseSidebar = () => {
+    setOpenSidebar(false);
+  };
 
   useEffect(() => {
     if (isMiddleScreen) {
@@ -19,13 +62,14 @@ const Header: React.FC = () => {
     }
   }, [isMiddleScreen]);
 
-  const handleCloseSidebar = () => {
-    setOpenSidebar(false);
-  };
-
   return (
     <>
-      <nav className="py-6 md:px-14 px-6 flex justify-between items-center absolute w-full hover:bg-white duration-400 transition-all">
+      <nav
+        className={clsx(
+          "py-6 md:px-14 px-6 flex justify-between items-center w-full hover:bg-white duration-400 transition-all",
+          isProfilePage && "absolute"
+        )}
+      >
         <div className="flex items-center gap-3 justify-between w-full">
           <Link className="text-3xl font-bold mr-2 no-underline" href={"/"}>
             <div className="text-red-700 font-mono">
@@ -36,36 +80,7 @@ const Header: React.FC = () => {
             </div>
           </Link>
           <div className="lg:flex xl:max-w-[50%] gap-6 w-3/5 hidden justify-between font-bold">
-            <Link
-              className="no-underline text-black hover:text-red-600"
-              href={"/"}
-            >
-              Profile
-            </Link>
-            <Link
-              className="no-underline text-black hover:text-red-600"
-              href={"#" + HEADER_IDS.ABOUT}
-            >
-              Setting
-            </Link>
-            <Link
-              className="no-underline text-black hover:text-red-600"
-              href={"#" + HEADER_IDS.EXPERIENCE}
-            >
-              Dashboard
-            </Link>
-            <Link
-              className="no-underline text-black hover:text-red-600"
-              href={"/daily"}
-            >
-              Daily
-            </Link>
-            <Link
-              className="no-underline text-black hover:text-red-600"
-              href={"#" + HEADER_IDS.EXPERIENCE}
-            >
-              Search
-            </Link>
+            {tabElements}
           </div>
           <div className="hidden lg:flex">
             <Button
@@ -73,6 +88,7 @@ const Header: React.FC = () => {
               size="large"
               sx={{
                 backgroundColor: "black",
+                ":hover": { opacity: 0.8, backgroundColor: "black" },
               }}
             >
               Login
@@ -88,7 +104,11 @@ const Header: React.FC = () => {
           </button>
         </div>
       </nav>
-      <Sidebar open={openSidebar} onClose={handleCloseSidebar} />
+      <Sidebar
+        open={openSidebar}
+        onClose={handleCloseSidebar}
+        tabElements={tabElements}
+      />
     </>
   );
 };

@@ -8,7 +8,7 @@ import Project from "@/components/home/project/Project";
 import Contact from "@/components/home/contact/Contact";
 import HomeTableOfContents from "@/components/home/HomeTableOfContents";
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
     <div>
       <Introduction />
@@ -20,4 +20,4 @@ const Home: React.FC = () => {
     </div>
   );
 };
-export default Home;
+export default HomePage;

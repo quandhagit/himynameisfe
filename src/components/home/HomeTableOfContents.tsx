@@ -1,20 +1,10 @@
 "use client";
 
-import { HEADER_IDS } from "@/constant/common";
+import { HOME_MENU_IDS, HomeMenuType } from "@/constant/home/common";
 import clsx from "clsx";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-
-const HOME_MENU = [
-  "Home",
-  "About",
-  "Experience",
-  "Project",
-  "Contact",
-] as const;
-
-type HomeMenuType = (typeof HOME_MENU)[number];
 
 const HomeTableOfContents = () => {
   const [selectedMenu, setSelectedMenu] = useState<HomeMenuType>("Home");
@@ -22,7 +12,6 @@ const HomeTableOfContents = () => {
   useEffect(() => {
     const handleObsever = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
-        console.log(entry.target.id + " - " + entry.intersectionRatio);
         if (entry.intersectionRatio >= 0.8) {
           setSelectedMenu(entry.target.id as HomeMenuType);
         }
@@ -46,9 +35,13 @@ const HomeTableOfContents = () => {
       </div>
       <div className="mt-20 flex group-hover:mt-0 flex-col gap-2 xl:mt-0 transition-all duration-300">
         <div className="font-bold text-blue-200">Table Of Contents</div>
-        {HOME_MENU.map((menu) => {
+        {Object.values(HOME_MENU_IDS).map((menu) => {
           return (
-            <HomeTableOfContentsRow value={menu} selectedMenu={selectedMenu} />
+            <HomeTableOfContentsRow
+              key={menu}
+              value={menu}
+              selectedMenu={selectedMenu}
+            />
           );
         })}
       </div>

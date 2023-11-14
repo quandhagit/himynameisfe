@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import NameAndRole from "@/feature/home/about/NameAndRole";
-import { HEADER_IDS } from "@/constant/common";
+import { HOME_MENU_IDS } from "@/constant/home/common";
 
 const data = {
   fullName: "Dang Hoang Anh Quan",
@@ -18,7 +18,7 @@ const data = {
 const About = () => {
   return (
     <section
-      id={HEADER_IDS.ABOUT}
+      id={HOME_MENU_IDS.ABOUT}
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 text-blue-950"
     >
       <div className="flex justify-between flex-wrap">

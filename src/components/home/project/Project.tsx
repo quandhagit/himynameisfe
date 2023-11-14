@@ -6,7 +6,7 @@ import ProjectList from "@/feature/home/project/ProjectList";
 import ProjectDialog from "@/feature/home/project/ProjectDialog";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectProject } from "@/redux/home/project/projectSlice";
-import { HEADER_IDS } from "@/constant/common";
+import { HOME_MENU_IDS } from "@/constant/home/common";
 
 const Project = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,8 +19,8 @@ const Project = () => {
 
   return (
     <section
-      id={HEADER_IDS.PROJECT}
-      className="sm:px-[10%] xl:px-[20%] px-5 py-24 "
+      id={HOME_MENU_IDS.PROJECT}
+      className="sm:px-[10%] xl:px-[20%] px-5 py-24 text-blue-950"
     >
       <div className="">
         <div>- PROJECTS</div>
