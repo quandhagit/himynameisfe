@@ -5,10 +5,16 @@ import React, { useCallback, useMemo } from "react";
 type WorkspaceCardProps = {
   workspace: Workspace;
   index: number;
+  length: number;
   onClick: (id: string) => void;
 };
 
-const WorkspaceCard = ({ workspace, index, onClick }: WorkspaceCardProps) => {
+const WorkspaceCard = ({
+  workspace,
+  index,
+  length,
+  onClick,
+}: WorkspaceCardProps) => {
   const {
     id: workspaceId,
     startDate,
@@ -33,7 +39,7 @@ const WorkspaceCard = ({ workspace, index, onClick }: WorkspaceCardProps) => {
   }, [workspaceId]);
 
   return (
-    <div className="relative hover:z-10">
+    <div className="relative" style={{ zIndex: length - index }}>
       {index !== 0 && (
         <div
           className={clsx(

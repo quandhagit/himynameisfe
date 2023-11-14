@@ -23,6 +23,7 @@ const WorkspaceList = () => {
             key={card.id}
             workspace={card}
             index={index}
+            length={workspaceList.length}
             onClick={handleClickCard}
           />
         );
