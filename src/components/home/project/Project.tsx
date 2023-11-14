@@ -18,7 +18,7 @@ const Project = () => {
   }, []);
 
   return (
-    <div
+    <section
       id={HEADER_IDS.PROJECT}
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 "
     >
@@ -34,7 +34,7 @@ const Project = () => {
           isOpen={!!selectedProject}
         />
       )}
-    </div>
+    </section>
   );
 };
 

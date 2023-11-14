@@ -12,7 +12,7 @@ const contractInfoData = {
 
 const Footer = () => {
   return (
-    <div className="sm:px-[10%] xl:px-[20%] px-5 py-5 text-blue-950 text-sm">
+    <footer className="sm:px-[10%] xl:px-[20%] px-5 py-5 text-blue-950 text-sm">
       <div>
         <div className="flex flex-wrap mt-4">
           <div className="lg:w-3/5 mb-10 lg:mb-2 pr-8">
@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

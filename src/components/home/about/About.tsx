@@ -17,7 +17,7 @@ const data = {
 
 const About = () => {
   return (
-    <div
+    <section
       id={HEADER_IDS.ABOUT}
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 text-blue-950"
     >
@@ -73,7 +73,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

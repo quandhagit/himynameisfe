@@ -6,7 +6,7 @@ import { HEADER_IDS } from "@/constant/common";
 
 const Introduction = () => {
   return (
-    <div
+    <section
       id={HEADER_IDS.HOME}
       className="bg-background-main min-h-screen pt-16 sm:px-[10%] xl:px-[20%] px-5 py-3 flex items-center flex-wrap-reverse bg-no-repeat bg-cover"
     >
@@ -16,7 +16,7 @@ const Introduction = () => {
       <div className="sm:w-1/2 flex justify-center mb-6 relative">
         <Avatar />
       </div>
-    </div>
+    </section>
   );
 };
 

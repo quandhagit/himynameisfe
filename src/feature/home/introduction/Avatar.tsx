@@ -10,7 +10,7 @@ const Avatar = () => {
         alt="q"
         width={450}
         height={450}
-        className="max-w-full h-auto"
+        className="max-w-full h-auto rounded-full"
       />
     </div>
   );

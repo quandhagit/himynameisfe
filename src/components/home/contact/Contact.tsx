@@ -6,7 +6,7 @@ import { HEADER_IDS } from "@/constant/common";
 
 const Contact = () => {
   return (
-    <div
+    <section
       id={HEADER_IDS.CONTACT}
       className="sm:px-[10%] xl:px-[20%] px-5 py-24 text-blue-950 bg-red-200"
     >
@@ -22,7 +22,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

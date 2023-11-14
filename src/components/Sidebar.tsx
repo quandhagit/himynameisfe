@@ -22,37 +22,31 @@ const Sidebar: React.FC<{ open: boolean; onClose: () => void }> = ({
           <CloseIcon />
         </button>
         <Link className="no-underline text-black hover:text-red-600" href={"/"}>
-          Home
+          Profile
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
           href={"#" + HEADER_IDS.ABOUT}
         >
-          About
+          Setting
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
           href={"#" + HEADER_IDS.EXPERIENCE}
         >
-          Experience
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"#" + HEADER_IDS.PROJECT}
-        >
-          Project
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"#" + HEADER_IDS.CONTACT}
-        >
-          Contact
+          Dashboard
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
           href={"/daily"}
         >
           Daily
+        </Link>
+        <Link
+          className="no-underline text-black hover:text-red-600"
+          href={"#" + HEADER_IDS.EXPERIENCE}
+        >
+          Search
         </Link>
         <Button
           variant="contained"

@@ -3,7 +3,8 @@
 import { HEADER_IDS } from "@/constant/common";
 import clsx from "clsx";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import WidgetsIcon from "@mui/icons-material/Widgets";
 
 const HOME_MENU = [
   "Home",
@@ -18,44 +19,54 @@ type HomeMenuType = (typeof HOME_MENU)[number];
 const HomeTableOfContents = () => {
   const [selectedMenu, setSelectedMenu] = useState<HomeMenuType>("Home");
 
-  const handleSelect = (menu: HomeMenuType) => {
-    setSelectedMenu(menu);
-  };
+  useEffect(() => {
+    const handleObsever = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        console.log(entry.target.id + " - " + entry.intersectionRatio);
+        if (entry.intersectionRatio >= 0.8) {
+          setSelectedMenu(entry.target.id as HomeMenuType);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleObsever, {
+      threshold: [0.8],
+    });
+
+    const elements = document.querySelectorAll("section[id]");
+    elements.forEach((elem) => observer.observe(elem));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="fixed w-52 top-1/4 left-6 rounded-md bg-opacity-30 p-4 bg-black flex flex-col gap-2">
-      <div className="font-bold text-blue-200">Table Of Contents</div>
-      {HOME_MENU.map((menu) => {
-        return (
-          <HomeTableOfContentsRow
-            value={menu}
-            onSelect={handleSelect}
-            selectedMenu={selectedMenu}
-          />
-        );
-      })}
+    <div className="group hover:w-52 hover:h-[216px] hover:rounded-md fixed w-14 h-14 top-1/4 left-6 overflow-hidden bg-opacity-30 p-4 bg-black flex flex-col rounded-md xl:w-52 xl:h-[216px] transition-all duration-300">
+      <div className="xl:hidden group-hover:hidden">
+        <WidgetsIcon className="text-white" />
+      </div>
+      <div className="mt-20 flex group-hover:mt-0 flex-col gap-2 xl:mt-0 transition-all duration-300">
+        <div className="font-bold text-blue-200">Table Of Contents</div>
+        {HOME_MENU.map((menu) => {
+          return (
+            <HomeTableOfContentsRow value={menu} selectedMenu={selectedMenu} />
+          );
+        })}
+      </div>
     </div>
   );
 };
 
 const HomeTableOfContentsRow = ({
   selectedMenu,
-  onSelect,
   value,
 }: {
   selectedMenu?: HomeMenuType;
-  onSelect: (menu: HomeMenuType) => void;
   value: HomeMenuType;
 }) => {
-  const handleSelect = () => {
-    onSelect(value);
-  };
-
   return (
     <Link
-      onClick={handleSelect}
       className={clsx(
-        "no-underline border-l-4 border-solid border-0 px-4 cursor-pointer font-bold",
+        "no-underline border-l-4 border-solid border-0 px-4 cursor-pointer font-semibold",
         selectedMenu === value
           ? "border-l-blue-400 text-blue-400"
           : "border-l-transparent text-white hover:text-blue-300"
