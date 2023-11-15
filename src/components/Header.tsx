@@ -69,7 +69,9 @@ const Header: React.FC = () => {
       <nav
         className={clsx(
           "py-6 md:px-14 px-6 flex justify-between items-center w-full bg-white duration-400 transition-all fixed z-50 top-0 shadow",
-          isProfilePage && isScrollOnTop && "bg-opacity-0 shadow-none"
+          isProfilePage &&
+            isScrollOnTop &&
+            "bg-opacity-0 shadow-none hover:bg-white"
         )}
       >
         <div className="flex items-center gap-3 justify-between w-full">
