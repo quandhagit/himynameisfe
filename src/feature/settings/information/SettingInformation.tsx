@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Divider } from "@mui/material";
+import { Avatar, Button, Divider } from "@mui/material";
 import CommonInput from "@/components/common/CommonInput";
 
 const SettingInformation = () => {
@@ -46,6 +46,14 @@ const SettingInformation = () => {
           <CommonInput label="LinkedIn" placeholder="Enter your link here" />
           <CommonInput label="Github" placeholder="Enter your link here" />
         </div>
+      </div>
+      <div className="flex mt-2 gap-5 justify-end">
+        <Button variant="outlined" size="large" className="w-24">
+          Cancel
+        </Button>
+        <Button variant="contained" size="large" className="w-24">
+          Save
+        </Button>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 const useMatchMedia = (mediaQuery: string): boolean => {
   const [, rerender] = useReducer((count: number) => count + 1, 0);

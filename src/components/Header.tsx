@@ -9,9 +9,11 @@ import { HOME_MENU_IDS } from "@/constant/home/common";
 import useMatchMedia from "@/utils/useMatchMedia";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import useDetectScroll from "@/utils/useDetectScrollOnTop";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
+  const { isScrollOnTop } = useDetectScroll();
   const pathname = usePathname();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
@@ -66,8 +68,8 @@ const Header: React.FC = () => {
     <>
       <nav
         className={clsx(
-          "py-6 md:px-14 px-6 flex justify-between items-center w-full hover:bg-white duration-400 transition-all",
-          isProfilePage && "absolute"
+          "py-6 md:px-14 px-6 flex justify-between items-center w-full bg-white duration-400 transition-all fixed z-50 top-0 shadow",
+          isProfilePage && isScrollOnTop && "bg-opacity-0 shadow-none"
         )}
       >
         <div className="flex items-center gap-3 justify-between w-full">
