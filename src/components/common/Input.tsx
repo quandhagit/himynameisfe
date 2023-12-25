@@ -1,8 +1,8 @@
 import React from "react";
-import { InputBaseComponentProps, TextField } from "@mui/material";
+import { InputBaseComponentProps, TextField, styled } from "@mui/material";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-type CommonInput = {
+type InputProps = {
   label: string;
   onValueChange?: (value: string) => void;
   multiline?: boolean;
@@ -10,12 +10,21 @@ type CommonInput = {
   type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   required?: boolean;
-  name?: string;
   register?: UseFormRegisterReturn;
   inputProps?: InputBaseComponentProps;
 };
 
-const CommonInput: React.FC<CommonInput> = (props) => {
+const Input: React.FC<InputProps> = (props) => {
+  const Input = styled(TextField)(() => ({
+    "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
+      display: "none",
+    },
+    "& input[type=number]": {
+      MozAppearance: "textfield",
+    },
+    // backgroundColor: "white",
+  }));
+
   const {
     label,
     onValueChange,
@@ -24,7 +33,7 @@ const CommonInput: React.FC<CommonInput> = (props) => {
     type = "text",
     placeholder,
     required = false,
-    register,
+    register = {},
     inputProps,
   } = props;
 
@@ -42,7 +51,7 @@ const CommonInput: React.FC<CommonInput> = (props) => {
         {label}
         {required && <span className="text-red-600 ml-0.5">*</span>}
       </div>
-      <TextField
+      <Input
         {...register}
         fullWidth
         multiline={multiline}
@@ -57,4 +66,4 @@ const CommonInput: React.FC<CommonInput> = (props) => {
   );
 };
 
-export default CommonInput;
+export default Input;

@@ -1,10 +1,5 @@
 import useMatchMedia from "@/utils/useMatchMedia";
-import {
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
+import { Dialog } from "@mui/material";
 import Image from "next/image";
 import React, { ReactNode } from "react";
 

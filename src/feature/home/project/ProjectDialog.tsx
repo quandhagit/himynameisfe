@@ -1,4 +1,4 @@
-import CommonDialog from "@/components/common/CommonDialog";
+import Dialog from "@/components/common/Dialog";
 import { Project } from "@/redux/home/project/projectSlice";
 import { Workspace } from "@/redux/home/workspace/workspaceSlice";
 import React, { useMemo } from "react";
@@ -33,7 +33,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = (props) => {
   }, [startDate, endDate]);
 
   return (
-    <CommonDialog isOpen={isOpen} imageUrl={image} onClose={onClose}>
+    <Dialog isOpen={isOpen} imageUrl={image} onClose={onClose}>
       <div className="flex gap-2 w-full mt-4 flex-col">
         <div className="text-yellow-600">{workDateRange}</div>
       </div>
@@ -61,7 +61,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = (props) => {
         </div>
       )}
       <div className="mt-5 text-gray-600 w-full">{description}</div>
-    </CommonDialog>
+    </Dialog>
   );
 };
 
