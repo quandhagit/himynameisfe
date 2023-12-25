@@ -1,23 +1,6 @@
-import { Button } from "@mui/material";
-import qImage from "../../public/images/q.png";
-import avatar from "../../public/images/avatar.png";
-import Introduction from "@/components/home/introduction/Introduction";
-import About from "@/components/home/about/About";
-import Workspace from "@/components/home/workspace/Workspace";
-import Project from "@/components/home/project/Project";
-import Contact from "@/components/home/contact/Contact";
-import HomeTableOfContents from "@/components/home/HomeTableOfContents";
+import HomePage from "@/components/home/HomePage";
 
-const HomePage: React.FC = () => {
-  return (
-    <div>
-      <Introduction />
-      <About />
-      <Workspace />
-      <Project />
-      <Contact />
-      <HomeTableOfContents />
-    </div>
-  );
+const Home: React.FC = () => {
+  return <HomePage />;
 };
-export default HomePage;
+export default Home;

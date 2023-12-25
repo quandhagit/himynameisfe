@@ -1,3 +1,4 @@
+import useMatchMedia from "@/utils/useMatchMedia";
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,11 @@ type CommonDialogProps = {
 };
 
 const CommonDialog: React.FC<CommonDialogProps> = (props) => {
+  const isSmallScreen = useMatchMedia("(max-width: 640px)");
+
   const { imageUrl, isOpen = false, onClose, children } = props;
+
+  console.log(isSmallScreen);
 
   return (
     <Dialog
@@ -39,7 +44,7 @@ const CommonDialog: React.FC<CommonDialogProps> = (props) => {
             sizes="100vw"
             style={{
               width: "100%",
-              height: "428px",
+              height: isSmallScreen ? "200px" : "428px",
               objectFit: "cover",
               borderRadius: "6px",
             }}
