@@ -12,6 +12,7 @@ type InputProps = {
   required?: boolean;
   register?: UseFormRegisterReturn;
   inputProps?: InputBaseComponentProps;
+  isDisabled?: boolean;
 };
 
 const Input: React.FC<InputProps> = (props) => {
@@ -22,7 +23,14 @@ const Input: React.FC<InputProps> = (props) => {
     "& input[type=number]": {
       MozAppearance: "textfield",
     },
-    // backgroundColor: "white",
+    "& input::placeholder": {
+      color: "#9ca3af",
+    },
+    background: "white",
+    "& input:disabled": {
+      background: "#f3f4f6",
+    },
+    borderColor: "#c4c2c2",
   }));
 
   const {
@@ -35,6 +43,7 @@ const Input: React.FC<InputProps> = (props) => {
     required = false,
     register = {},
     inputProps,
+    isDisabled = false,
   } = props;
 
   const handleOnChange = (
@@ -52,6 +61,7 @@ const Input: React.FC<InputProps> = (props) => {
         {required && <span className="text-red-600 ml-0.5">*</span>}
       </div>
       <Input
+        disabled={isDisabled}
         {...register}
         fullWidth
         multiline={multiline}

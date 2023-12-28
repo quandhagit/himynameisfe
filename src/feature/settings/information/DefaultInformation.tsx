@@ -9,8 +9,8 @@ type SettingProps = {
 
 const DefaultInformation: React.FC<SettingProps> = ({ register }) => {
   return (
-    <div className="flex justify-between flex-wrap items-center py-8">
-      <div className="flex justify-center px-16 mb-4 items-center lg:w-1/3 w-full">
+    <div className="flex justify-between flex-wrap items-center py-8 gap-y-6">
+      <div className="flex justify-center px-16 items-center lg:w-1/3 w-full">
         <Avatar sx={{ width: "200px", height: "200px" }} />
       </div>
       <div className="flex flex-col lg:w-2/3 w-full gap-4">

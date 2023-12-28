@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo } from "react";
+import React, { ReactNode, useId, useMemo } from "react";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import ReactSelect, { SingleValue, StylesConfig } from "react-select";
 
@@ -16,6 +16,8 @@ type SingleSelectProps<OptionType> = {
   placeholder?: string;
   required?: boolean;
   control?: Control<FieldValues>;
+  isDisabled?: boolean;
+  isLoading?: boolean;
 };
 
 function SingleSelect<OptionType extends OptionTypeBase>(
@@ -29,6 +31,8 @@ function SingleSelect<OptionType extends OptionTypeBase>(
     required = false,
     control,
     registerName,
+    isDisabled = false,
+    isLoading = false,
   } = props;
 
   const handleOnChange = (value: SingleValue<OptionType> | null) => {
@@ -44,9 +48,9 @@ function SingleSelect<OptionType extends OptionTypeBase>(
       lineHeight: "20px",
     };
     return {
-      control: (styles, { isFocused }) => ({
+      control: (styles, { isFocused, isDisabled }) => ({
         ...styles,
-        backgroundColor: "transparent",
+        backgroundColor: isDisabled ? "#f3f4f6" : "white",
         borderColor: isFocused ? "#ee1042" : "#c4c2c2", // Border/Primary or Border/Secondary
         outline: "#ee1042",
         boxShadow: isFocused ? "0px 0px 0px 1px #ee1042" : "none",
@@ -62,13 +66,14 @@ function SingleSelect<OptionType extends OptionTypeBase>(
         ...styles,
         ...optionsCommon,
         backgroundColor: isFocused || isSelected ? "#EFF6FF" : "transparent",
-        color: "#1F2937", // Text/Primary
+        color: "#1F2937",
       }),
       placeholder: (styles) => ({
         ...styles,
-        color: "#9CA3AF", // Text/Tertiary
+        color: "#9ca3af",
         fontWeight: "200",
         fontSize: "16px",
+        opacity: "0.4",
       }),
       indicatorSeparator: () => ({
         display: "none",
@@ -91,6 +96,9 @@ function SingleSelect<OptionType extends OptionTypeBase>(
         name={registerName}
         render={({ field: { onChange, value } }) => (
           <ReactSelect<OptionType>
+            isLoading={isLoading}
+            isDisabled={isDisabled}
+            instanceId={useId()}
             value={options.find((option) => value === option.value)}
             options={options}
             placeholder={placeholder}

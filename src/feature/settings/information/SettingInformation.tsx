@@ -7,13 +7,13 @@ import AboutMe from "./AboutMe";
 import ExternalLink from "./ExternalLink";
 
 const SettingInformation = () => {
-  const { handleSubmit, register, control } = useForm();
+  const { handleSubmit, register, watch, control } = useForm();
 
   return (
     <div>
       <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
         <DefaultInformation register={register} />
-        <AboutMe register={register} control={control} />
+        <AboutMe register={register} control={control} watch={watch} />
         <ExternalLink register={register} />
         <div className="flex mt-2 gap-5 justify-end">
           <Button variant="outlined" size="large" className="w-24">

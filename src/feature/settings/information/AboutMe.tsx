@@ -1,43 +1,75 @@
 import Input from "@/components/common/Input";
 import SingleSelect from "@/components/common/SingleSelect";
 import { Divider } from "@mui/material";
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Noto_Color_Emoji } from "next/font/google";
+import React, { useMemo } from "react";
 import {
   Control,
   FieldValues,
   UseFormRegister,
-  useForm,
+  UseFormWatch,
 } from "react-hook-form";
 
-const testData = [
-  {
-    value: "1",
-    label: "One",
-  },
-  {
-    value: "2",
-    label: "Two",
-  },
-  {
-    value: "3",
-    label: "Three",
-  },
-  {
-    value: "4",
-    label: "Four",
-  },
-  {
-    value: "5",
-    label: "Five",
-  },
-];
+const countryFont = Noto_Color_Emoji({ weight: "400", subsets: ["emoji"] });
 
 type SettingProps = {
   register: UseFormRegister<FieldValues>;
   control: Control<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
 };
 
-const AboutMe: React.FC<SettingProps> = ({ register, control }) => {
+type Country = {
+  name: string;
+  unicodeFlag: string;
+  cities: string[];
+};
+
+type CountryWithFlagResponse = {
+  error: boolean;
+  msg: string;
+  data: Country[];
+};
+
+const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
+  const { isLoading: isCountryLoading, data: countries } =
+    useQuery<CountryWithFlagResponse>({
+      queryKey: ["countries"],
+      queryFn: () =>
+        fetch(
+          "https://countriesnow.space/api/v0.1/countries/info?returns=cities,unicodeFlag"
+        ).then((res) => res.json()),
+    });
+
+  const countryOptions = useMemo(() => {
+    return (countries?.data || [])
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map((country) => {
+        return {
+          value: country.name,
+          label: (
+            <div className="flex gap-2">
+              <span className={countryFont.className}>
+                {country.unicodeFlag}
+              </span>
+              {country.name}
+            </div>
+          ),
+        };
+      });
+  }, [countries]);
+
+  const cityOptions = useMemo(() => {
+    return countries?.data
+      .find((country) => country.name === watch("country"))
+      ?.cities.map((city) => {
+        return {
+          value: city,
+          label: city,
+        };
+      });
+  }, [countries, watch("country")]);
+
   return (
     <div className="w-full">
       <h3 className="my-4">About Me</h3>
@@ -51,16 +83,27 @@ const AboutMe: React.FC<SettingProps> = ({ register, control }) => {
           type="number"
           inputProps={{ inputMode: "tel" }}
         />
-        <Input
-          register={register("address")}
-          label="Address"
-          placeholder="Enter your address"
+        <SingleSelect
+          isLoading={isCountryLoading}
+          options={countryOptions}
+          control={control}
+          registerName="country"
+          label="Country"
+          placeholder="Select your country"
           required
         />
         <SingleSelect
-          options={testData}
+          isDisabled={!watch("country")}
+          options={cityOptions || []}
           control={control}
-          registerName="country"
+          registerName="city"
+          label="City"
+          placeholder="Select your city"
+          required
+        />
+        <Input
+          isDisabled={!watch("city")}
+          register={register("address")}
           label="Address"
           placeholder="Enter your address"
           required

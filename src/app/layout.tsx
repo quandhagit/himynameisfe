@@ -2,11 +2,12 @@ import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import ApolloProviders from "@/apollo/components/ApolloProviders";
-import ThemeRegistry from "@/components/themeCustom/ThemeRegistry";
+import ThemeRegistry from "@/provider/themeCustom/ThemeRegistry";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/Footer";
-import Sidebar from "@/components/Sidebar";
 import ReduxProvider from "@/redux/ReduxProvider";
+import ReactQueryProvider from "@/provider/reactQuery/ReactQueryProvider";
+import { Suspense } from "react";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -30,17 +31,21 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
           <div className="gradient" />
         </div>
         <main>
-          <ApolloProviders>
-            <ReduxProvider>
-              <ThemeRegistry options={{ key: "mui", prepend: true }}>
-                <Header />
-                <div className="selection:bg-red-300 min-h-screen">
-                  {props.children}
-                </div>
-                <Footer />
-              </ThemeRegistry>
-            </ReduxProvider>
-          </ApolloProviders>
+          <ReactQueryProvider>
+            <Suspense fallback={null}>
+              <ApolloProviders>
+                <ReduxProvider>
+                  <ThemeRegistry options={{ key: "mui", prepend: true }}>
+                    <Header />
+                    <div className="selection:bg-red-300 min-h-screen">
+                      {props.children}
+                    </div>
+                    <Footer />
+                  </ThemeRegistry>
+                </ReduxProvider>
+              </ApolloProviders>
+            </Suspense>
+          </ReactQueryProvider>
         </main>
       </body>
     </html>
