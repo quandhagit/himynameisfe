@@ -16,26 +16,30 @@ const DefaultInformation: React.FC<SettingProps> = ({ register }) => {
       <div className="flex flex-col lg:w-2/3 w-full gap-4">
         <div className="flex gap-4 flex-col sm:flex-row">
           <Input
-            register={register("lastName")}
+            register={register}
+            registerName="lastName"
             label="Last name"
             placeholder="Enter your last name"
             required
           />
           <Input
-            register={register("FirstName")}
+            register={register}
+            registerName="firstName"
             label="First name"
             placeholder="Enter your first name"
             required
           />
         </div>
         <Input
-          register={register("email")}
+          register={register}
+          registerName="email"
           label="Email"
           placeholder="Enter your email"
           required
         />
         <Input
-          register={register("dateOfBirth")}
+          register={register}
+          registerName="dateOfBirth"
           label="Date of birth"
           type="date"
           placeholder="Enter your date of birth"

@@ -1,4 +1,4 @@
-import React, { ReactNode, useId, useMemo } from "react";
+import React, { ReactNode, useEffect, useId, useMemo, useState } from "react";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import ReactSelect, { SingleValue, StylesConfig } from "react-select";
 
@@ -11,7 +11,7 @@ type SingleSelectProps<OptionType> = {
   label: string;
   onValueChange?: (value: SingleValue<OptionType>) => void;
   registerName: string;
-  // value?: OptionType;
+  defaultValue?: unknown;
   options: readonly OptionType[];
   placeholder?: string;
   required?: boolean;
@@ -33,6 +33,7 @@ function SingleSelect<OptionType extends OptionTypeBase>(
     registerName,
     isDisabled = false,
     isLoading = false,
+    defaultValue,
   } = props;
 
   const handleOnChange = (value: SingleValue<OptionType> | null) => {
@@ -94,21 +95,26 @@ function SingleSelect<OptionType extends OptionTypeBase>(
       <Controller
         control={control}
         name={registerName}
-        render={({ field: { onChange, value } }) => (
-          <ReactSelect<OptionType>
-            isLoading={isLoading}
-            isDisabled={isDisabled}
-            instanceId={useId()}
-            value={options.find((option) => value === option.value)}
-            options={options}
-            placeholder={placeholder}
-            onChange={(value) => {
-              onChange(value?.value);
-              handleOnChange(value);
-            }}
-            styles={colourStyles}
-          />
-        )}
+        defaultValue={defaultValue}
+        disabled={isDisabled}
+        render={({ field: { onChange, value } }) => {
+          console.log(value);
+          return (
+            <ReactSelect<OptionType>
+              isLoading={isLoading}
+              isDisabled={isDisabled}
+              instanceId={useId()}
+              value={options.find((option) => value === option.value) || null}
+              options={options}
+              placeholder={placeholder}
+              onChange={(value) => {
+                onChange(value?.value);
+                handleOnChange(value);
+              }}
+              styles={colourStyles}
+            />
+          );
+        }}
       />
     </div>
   );

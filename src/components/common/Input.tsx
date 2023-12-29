@@ -1,6 +1,6 @@
 import React from "react";
 import { InputBaseComponentProps, TextField, styled } from "@mui/material";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 type InputProps = {
   label: string;
@@ -10,9 +10,13 @@ type InputProps = {
   type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   required?: boolean;
-  register?: UseFormRegisterReturn;
+  register?: UseFormRegister<FieldValues>;
   inputProps?: InputBaseComponentProps;
   isDisabled?: boolean;
+  registerName?: string;
+  requireErrorMessage?: string;
+  validationErrorMessage?: string;
+  pattern?: RegExp;
 };
 
 const Input: React.FC<InputProps> = (props) => {
@@ -41,9 +45,13 @@ const Input: React.FC<InputProps> = (props) => {
     type = "text",
     placeholder,
     required = false,
-    register = {},
+    register = () => {},
     inputProps,
     isDisabled = false,
+    registerName = "",
+    requireErrorMessage = "",
+    validationErrorMessage = "",
+    pattern = /()/,
   } = props;
 
   const handleOnChange = (
@@ -62,7 +70,10 @@ const Input: React.FC<InputProps> = (props) => {
       </div>
       <Input
         disabled={isDisabled}
-        {...register}
+        {...register(registerName, {
+          required: { value: required, message: requireErrorMessage },
+          pattern: { value: pattern, message: validationErrorMessage },
+        })}
         fullWidth
         multiline={multiline}
         rows={rows}

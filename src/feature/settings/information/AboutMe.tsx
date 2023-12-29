@@ -25,7 +25,7 @@ type Country = {
   cities: string[];
 };
 
-type CountryWithFlagResponse = {
+type CountryResponse = {
   error: boolean;
   msg: string;
   data: Country[];
@@ -33,7 +33,7 @@ type CountryWithFlagResponse = {
 
 const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
   const { isLoading: isCountryLoading, data: countries } =
-    useQuery<CountryWithFlagResponse>({
+    useQuery<CountryResponse>({
       queryKey: ["countries"],
       queryFn: () =>
         fetch(
@@ -60,14 +60,18 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
   }, [countries]);
 
   const cityOptions = useMemo(() => {
-    return countries?.data
-      .find((country) => country.name === watch("country"))
-      ?.cities.map((city) => {
-        return {
-          value: city,
-          label: city,
-        };
-      });
+    const selectedCountry = (countries?.data || []).find(
+      (country) => country.name === watch("country")
+    );
+
+    if (!selectedCountry || !selectedCountry.cities) return [];
+
+    return selectedCountry.cities.map((city) => {
+      return {
+        value: city,
+        label: city,
+      };
+    });
   }, [countries, watch("country")]);
 
   return (
@@ -76,7 +80,8 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
       <Divider />
       <div className="w-full py-8 flex flex-col gap-4">
         <Input
-          register={register("phoneNumber")}
+          register={register}
+          registerName="phoneNumber"
           label="Phone Number"
           placeholder="Enter your phone number"
           required
@@ -90,11 +95,12 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
           registerName="country"
           label="Country"
           placeholder="Select your country"
+          defaultValue="Vietnam"
           required
         />
         <SingleSelect
           isDisabled={!watch("country")}
-          options={cityOptions || []}
+          options={cityOptions}
           control={control}
           registerName="city"
           label="City"
@@ -103,26 +109,29 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
         />
         <Input
           isDisabled={!watch("city")}
-          register={register("address")}
+          register={register}
+          registerName="address"
           label="Address"
           placeholder="Enter your address"
-          required
         />
         <Input
-          register={register("role")}
+          register={register}
+          registerName="role"
           label="Role"
           placeholder="Enter your work role"
           required
         />
         <Input
-          register={register("shortDescription")}
+          register={register}
+          registerName="shortDescription"
           label="Short description"
           multiline
           rows={3}
           placeholder="Enter something about you"
         />
         <Input
-          register={register("description")}
+          register={register}
+          registerName="description"
           label="Description"
           multiline
           rows={5}

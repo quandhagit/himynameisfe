@@ -14,17 +14,20 @@ const ExternalLink: React.FC<SettingProps> = ({ register }) => {
       <Divider />
       <div className="w-full py-8 flex flex-col gap-4">
         <Input
-          register={register("facebookUrl")}
+          register={register}
+          registerName="facebookUrl"
           label="Facebook"
           placeholder="Enter your link here"
         />
         <Input
-          register={register("linkedInUrl")}
+          register={register}
+          registerName="linkedInUrl"
           label="LinkedIn"
           placeholder="Enter your link here"
         />
         <Input
-          register={register("githubUrl")}
+          register={register}
+          registerName="githubUrl"
           label="Github"
           placeholder="Enter your link here"
         />
