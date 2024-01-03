@@ -1,7 +1,6 @@
 import Input from "@/components/common/Input";
 import { Divider } from "@mui/material";
 import React from "react";
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 const ExternalLink: React.FC = () => {
   return (

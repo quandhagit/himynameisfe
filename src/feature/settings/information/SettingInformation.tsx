@@ -1,6 +1,5 @@
 import React from "react";
-import { Avatar, Button, Divider } from "@mui/material";
-import Input from "@/components/common/Input";
+import { Button } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import DefaultInformation from "./DefaultInformation";
 import AboutMe from "./AboutMe";
@@ -18,7 +17,12 @@ const SettingInformation = () => {
   return (
     <div>
       <FormProvider {...form}>
-        <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
+        <form
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+            alert(JSON.stringify(data));
+          })}
+        >
           <DefaultInformation />
           <AboutMe />
           <ExternalLink />

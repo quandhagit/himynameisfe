@@ -1,13 +1,6 @@
 import Input from "@/components/common/Input";
 import { Avatar } from "@mui/material";
 import React from "react";
-import {
-  FieldErrors,
-  FieldValues,
-  UseFormRegister,
-  useForm,
-  useFormContext,
-} from "react-hook-form";
 
 const DefaultInformation: React.FC = () => {
   return (
