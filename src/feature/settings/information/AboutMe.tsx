@@ -6,17 +6,20 @@ import { Noto_Color_Emoji } from "next/font/google";
 import React, { useMemo } from "react";
 import {
   Control,
+  FieldErrors,
   FieldValues,
   UseFormRegister,
+  UseFormTrigger,
   UseFormWatch,
 } from "react-hook-form";
 
 const countryFont = Noto_Color_Emoji({ weight: "400", subsets: ["emoji"] });
 
 type SettingProps = {
-  register: UseFormRegister<FieldValues>;
   control: Control<FieldValues>;
   watch: UseFormWatch<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  trigger: UseFormTrigger<FieldValues>;
 };
 
 type Country = {
@@ -31,7 +34,12 @@ type CountryResponse = {
   data: Country[];
 };
 
-const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
+const AboutMe: React.FC<SettingProps> = ({
+  control,
+  watch,
+  errors,
+  trigger,
+}) => {
   const { isLoading: isCountryLoading, data: countries } =
     useQuery<CountryResponse>({
       queryKey: ["countries"],
@@ -80,13 +88,14 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
       <Divider />
       <div className="w-full py-8 flex flex-col gap-4">
         <Input
-          register={register}
+          control={control}
           registerName="phoneNumber"
           label="Phone Number"
           placeholder="Enter your phone number"
           required
           type="number"
           inputProps={{ inputMode: "tel" }}
+          errors={errors}
         />
         <SingleSelect
           isLoading={isCountryLoading}
@@ -95,8 +104,8 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
           registerName="country"
           label="Country"
           placeholder="Select your country"
-          defaultValue="Vietnam"
           required
+          errors={errors}
         />
         <SingleSelect
           isDisabled={!watch("country")}
@@ -106,23 +115,25 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
           label="City"
           placeholder="Select your city"
           required
+          errors={errors}
         />
         <Input
           isDisabled={!watch("city")}
-          register={register}
+          control={control}
           registerName="address"
           label="Address"
           placeholder="Enter your address"
         />
         <Input
-          register={register}
+          control={control}
           registerName="role"
           label="Role"
           placeholder="Enter your work role"
           required
+          errors={errors}
         />
         <Input
-          register={register}
+          control={control}
           registerName="shortDescription"
           label="Short description"
           multiline
@@ -130,7 +141,7 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
           placeholder="Enter something about you"
         />
         <Input
-          register={register}
+          control={control}
           registerName="description"
           label="Description"
           multiline

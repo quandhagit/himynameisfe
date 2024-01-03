@@ -15,8 +15,6 @@ const CommonDialog: React.FC<CommonDialogProps> = (props) => {
 
   const { imageUrl, isOpen = false, onClose, children } = props;
 
-  console.log(isSmallScreen);
-
   return (
     <Dialog
       open={isOpen}

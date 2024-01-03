@@ -1,26 +1,45 @@
 import React from "react";
-import { Avatar, Button, Divider } from "@mui/material";
-import Input from "@/components/common/Input";
+import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import DefaultInformation from "./DefaultInformation";
 import AboutMe from "./AboutMe";
 import ExternalLink from "./ExternalLink";
 
 const SettingInformation = () => {
-  const { handleSubmit, register, watch, control, reset } = useForm();
+  const {
+    handleSubmit,
+    watch,
+    control,
+    reset,
+    trigger,
+    formState: { errors, isValid, isDirty },
+  } = useForm({ mode: "onBlur", reValidateMode: "onBlur" });
 
   return (
     <div>
-      <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
-        <DefaultInformation register={register} />
-        <AboutMe register={register} control={control} watch={watch} />
-        <ExternalLink register={register} />
+      <form
+        name="informationForm"
+        onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
+      >
+        <DefaultInformation
+          control={control}
+          errors={errors}
+          trigger={trigger}
+        />
+        <AboutMe
+          control={control}
+          watch={watch}
+          errors={errors}
+          trigger={trigger}
+        />
+        <ExternalLink control={control} errors={errors} />
         <div className="flex mt-2 gap-5 justify-end">
           <Button
             variant="outlined"
             size="large"
             className="w-24"
             onClick={reset}
+            // disabled={!isDirty}
           >
             Cancel
           </Button>
@@ -29,6 +48,7 @@ const SettingInformation = () => {
             size="large"
             className="w-24"
             type="submit"
+            disabled={!isValid}
           >
             Save
           </Button>

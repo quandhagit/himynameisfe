@@ -1,5 +1,12 @@
+import { ErrorMessage } from "@hookform/error-message";
 import React, { ReactNode, useEffect, useId, useMemo, useState } from "react";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  FieldValues,
+  UseFormTrigger,
+} from "react-hook-form";
 import ReactSelect, { SingleValue, StylesConfig } from "react-select";
 
 type OptionTypeBase = {
@@ -18,6 +25,7 @@ type SingleSelectProps<OptionType> = {
   control?: Control<FieldValues>;
   isDisabled?: boolean;
   isLoading?: boolean;
+  errors?: FieldErrors<FieldValues>;
 };
 
 function SingleSelect<OptionType extends OptionTypeBase>(
@@ -34,6 +42,7 @@ function SingleSelect<OptionType extends OptionTypeBase>(
     isDisabled = false,
     isLoading = false,
     defaultValue,
+    errors,
   } = props;
 
   const handleOnChange = (value: SingleValue<OptionType> | null) => {
@@ -97,8 +106,10 @@ function SingleSelect<OptionType extends OptionTypeBase>(
         name={registerName}
         defaultValue={defaultValue}
         disabled={isDisabled}
+        rules={{
+          required: { value: required, message: `${label} is required!` },
+        }}
         render={({ field: { onChange, value } }) => {
-          console.log(value);
           return (
             <ReactSelect<OptionType>
               isLoading={isLoading}
@@ -116,6 +127,15 @@ function SingleSelect<OptionType extends OptionTypeBase>(
           );
         }}
       />
+      {errors && (
+        <ErrorMessage
+          errors={errors}
+          name={registerName}
+          render={({ message }) => (
+            <div className="text-red-600 mt-1">{message}</div>
+          )}
+        />
+      )}
     </div>
   );
 }

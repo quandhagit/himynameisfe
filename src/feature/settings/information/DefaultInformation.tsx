@@ -1,13 +1,25 @@
 import Input from "@/components/common/Input";
 import { Avatar } from "@mui/material";
 import React from "react";
-import { FieldValues, UseFormRegister, useForm } from "react-hook-form";
+import {
+  Control,
+  FieldErrors,
+  FieldValues,
+  UseFormRegister,
+  UseFormTrigger,
+} from "react-hook-form";
 
 type SettingProps = {
-  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  trigger: UseFormTrigger<FieldValues>;
+  control: Control<FieldValues>;
 };
 
-const DefaultInformation: React.FC<SettingProps> = ({ register }) => {
+const DefaultInformation: React.FC<SettingProps> = ({
+  control,
+  errors,
+  trigger,
+}) => {
   return (
     <div className="flex justify-between flex-wrap items-center py-8 gap-y-6">
       <div className="flex justify-center px-16 items-center lg:w-1/3 w-full">
@@ -16,34 +28,38 @@ const DefaultInformation: React.FC<SettingProps> = ({ register }) => {
       <div className="flex flex-col lg:w-2/3 w-full gap-4">
         <div className="flex gap-4 flex-col sm:flex-row">
           <Input
-            register={register}
+            control={control}
             registerName="lastName"
             label="Last name"
             placeholder="Enter your last name"
             required
+            errors={errors}
           />
           <Input
-            register={register}
+            control={control}
             registerName="firstName"
             label="First name"
             placeholder="Enter your first name"
             required
+            errors={errors}
           />
         </div>
         <Input
-          register={register}
+          control={control}
           registerName="email"
           label="Email"
           placeholder="Enter your email"
           required
+          errors={errors}
         />
         <Input
-          register={register}
+          control={control}
           registerName="dateOfBirth"
           label="Date of birth"
           type="date"
           placeholder="Enter your date of birth"
           required
+          errors={errors}
         />
       </div>
     </div>
