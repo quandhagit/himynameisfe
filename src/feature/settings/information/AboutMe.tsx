@@ -6,18 +6,14 @@ import { Noto_Color_Emoji } from "next/font/google";
 import React, { useMemo } from "react";
 import {
   Control,
+  FieldErrors,
   FieldValues,
   UseFormRegister,
   UseFormWatch,
+  useFormContext,
 } from "react-hook-form";
 
 const countryFont = Noto_Color_Emoji({ weight: "400", subsets: ["emoji"] });
-
-type SettingProps = {
-  register: UseFormRegister<FieldValues>;
-  control: Control<FieldValues>;
-  watch: UseFormWatch<FieldValues>;
-};
 
 type Country = {
   name: string;
@@ -31,7 +27,9 @@ type CountryResponse = {
   data: Country[];
 };
 
-const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
+const AboutMe: React.FC = () => {
+  const { watch } = useFormContext();
+
   const { isLoading: isCountryLoading, data: countries } =
     useQuery<CountryResponse>({
       queryKey: ["countries"],
@@ -80,7 +78,6 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
       <Divider />
       <div className="w-full py-8 flex flex-col gap-4">
         <Input
-          register={register}
           registerName="phoneNumber"
           label="Phone Number"
           placeholder="Enter your phone number"
@@ -91,17 +88,14 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
         <SingleSelect
           isLoading={isCountryLoading}
           options={countryOptions}
-          control={control}
           registerName="country"
           label="Country"
           placeholder="Select your country"
-          defaultValue="Vietnam"
           required
         />
         <SingleSelect
           isDisabled={!watch("country")}
           options={cityOptions}
-          control={control}
           registerName="city"
           label="City"
           placeholder="Select your city"
@@ -109,20 +103,17 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
         />
         <Input
           isDisabled={!watch("city")}
-          register={register}
           registerName="address"
           label="Address"
           placeholder="Enter your address"
         />
         <Input
-          register={register}
           registerName="role"
           label="Role"
           placeholder="Enter your work role"
           required
         />
         <Input
-          register={register}
           registerName="shortDescription"
           label="Short description"
           multiline
@@ -130,7 +121,6 @@ const AboutMe: React.FC<SettingProps> = ({ register, control, watch }) => {
           placeholder="Enter something about you"
         />
         <Input
-          register={register}
           registerName="description"
           label="Description"
           multiline

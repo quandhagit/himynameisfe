@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { InputBaseComponentProps, TextField, styled } from "@mui/material";
-import { FieldValues, UseFormRegister } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  FieldValues,
+  UseFormRegister,
+  useFormContext,
+} from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 type InputProps = {
   label: string;
@@ -14,9 +22,9 @@ type InputProps = {
   inputProps?: InputBaseComponentProps;
   isDisabled?: boolean;
   registerName?: string;
-  requireErrorMessage?: string;
   validationErrorMessage?: string;
   pattern?: RegExp;
+  errors?: FieldErrors<FieldValues>;
 };
 
 const Input: React.FC<InputProps> = (props) => {
@@ -38,6 +46,11 @@ const Input: React.FC<InputProps> = (props) => {
   }));
 
   const {
+    formState: { errors },
+    control,
+  } = useFormContext();
+
+  const {
     label,
     onValueChange,
     multiline,
@@ -45,14 +58,14 @@ const Input: React.FC<InputProps> = (props) => {
     type = "text",
     placeholder,
     required = false,
-    register = () => {},
     inputProps,
     isDisabled = false,
     registerName = "",
-    requireErrorMessage = "",
     validationErrorMessage = "",
     pattern = /()/,
   } = props;
+
+  const [isTyping, setIsTyping] = useState(false);
 
   const handleOnChange = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -68,21 +81,49 @@ const Input: React.FC<InputProps> = (props) => {
         {label}
         {required && <span className="text-red-600 ml-0.5">*</span>}
       </div>
-      <Input
+      <Controller
+        control={control}
+        name={registerName}
         disabled={isDisabled}
-        {...register(registerName, {
-          required: { value: required, message: requireErrorMessage },
+        rules={{
+          required: { value: required, message: `${label} is required!` },
           pattern: { value: pattern, message: validationErrorMessage },
-        })}
-        fullWidth
-        multiline={multiline}
-        rows={rows}
-        size="small"
-        type={type}
-        inputProps={inputProps}
-        placeholder={placeholder}
-        onChange={handleOnChange}
+        }}
+        render={({ field: { onChange, value, onBlur } }) => {
+          return (
+            <Input
+              disabled={isDisabled}
+              fullWidth
+              multiline={multiline}
+              rows={rows}
+              size="small"
+              value={value}
+              type={type}
+              inputProps={inputProps}
+              placeholder={placeholder}
+              onChange={(event) => {
+                setIsTyping(true);
+                onChange(event);
+                handleOnChange(event);
+              }}
+              onBlur={() => {
+                onBlur();
+                setIsTyping(false);
+              }}
+              autoFocus={isTyping}
+            />
+          );
+        }}
       />
+      {!isTyping && errors && (
+        <ErrorMessage
+          errors={errors}
+          name={registerName}
+          render={({ message }) => (
+            <div className="text-red-600 mt-1">{message}</div>
+          )}
+        />
+      )}
     </div>
   );
 };

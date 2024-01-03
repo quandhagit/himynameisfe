@@ -1,39 +1,48 @@
 import React from "react";
 import { Avatar, Button, Divider } from "@mui/material";
 import Input from "@/components/common/Input";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import DefaultInformation from "./DefaultInformation";
 import AboutMe from "./AboutMe";
 import ExternalLink from "./ExternalLink";
 
 const SettingInformation = () => {
-  const { handleSubmit, register, watch, control, reset } = useForm();
+  const form = useForm({ mode: "onBlur", reValidateMode: "onBlur" });
+
+  const {
+    handleSubmit,
+    reset,
+    formState: { isValid },
+  } = form;
 
   return (
     <div>
-      <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
-        <DefaultInformation register={register} />
-        <AboutMe register={register} control={control} watch={watch} />
-        <ExternalLink register={register} />
-        <div className="flex mt-2 gap-5 justify-end">
-          <Button
-            variant="outlined"
-            size="large"
-            className="w-24"
-            onClick={reset}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            size="large"
-            className="w-24"
-            type="submit"
-          >
-            Save
-          </Button>
-        </div>
-      </form>
+      <FormProvider {...form}>
+        <form onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}>
+          <DefaultInformation />
+          <AboutMe />
+          <ExternalLink />
+          <div className="flex mt-2 gap-5 justify-end">
+            <Button
+              variant="outlined"
+              size="large"
+              className="w-24"
+              onClick={reset}
+            >
+              Reset
+            </Button>
+            <Button
+              variant="contained"
+              size="large"
+              className="w-24"
+              type="submit"
+              disabled={!isValid}
+            >
+              Save
+            </Button>
+          </div>
+        </form>
+      </FormProvider>
     </div>
   );
 };
