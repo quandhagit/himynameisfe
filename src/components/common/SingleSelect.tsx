@@ -1,5 +1,5 @@
 import { ErrorMessage } from "@hookform/error-message";
-import React, { ReactNode, useEffect, useId, useMemo, useState } from "react";
+import React, { ReactNode, useId, useMemo } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import ReactSelect, { SingleValue, StylesConfig } from "react-select";
 
@@ -39,6 +39,8 @@ function SingleSelect<OptionType extends OptionTypeBase>(
     isLoading = false,
     defaultValue,
   } = props;
+
+  const selectId = useId();
 
   const handleOnChange = (value: SingleValue<OptionType> | null) => {
     if (typeof onValueChange === "function") {
@@ -109,7 +111,7 @@ function SingleSelect<OptionType extends OptionTypeBase>(
             <ReactSelect<OptionType>
               isLoading={isLoading}
               isDisabled={isDisabled}
-              instanceId={useId()}
+              instanceId={selectId}
               value={options.find((option) => value === option.value) || null}
               options={options}
               placeholder={placeholder}

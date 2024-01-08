@@ -12,7 +12,7 @@ type DashboardLayoutProps = {
 };
 
 const ThemeRegistry: React.FC<DashboardLayoutProps> = (props) => {
-  const { options, children } = props;
+  const { children } = props;
 
   return (
     <ThemeProvider theme={theme}>

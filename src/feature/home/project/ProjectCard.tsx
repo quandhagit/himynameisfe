@@ -1,6 +1,4 @@
-import { DUMB_IMAGE_URL } from "@/constant/common";
 import { Project } from "@/redux/home/project/projectSlice";
-import clsx from "clsx";
 import moment from "moment";
 import Image from "next/image";
 import React, { useCallback, useMemo } from "react";
@@ -39,7 +37,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
   const handleSelectProject = useCallback(() => {
     onClick(projectId);
-  }, [projectId]);
+  }, [projectId, onClick]);
 
   return (
     <div
@@ -59,7 +57,7 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
       />
       <div className="absolute bottom-0 h-auto min-h-[140px] bg-white w-full p-4">
         <div className="text-lg font-bold text-blue-950">{projectName}</div>
-        <div className="line-clamp-3 mt-2">{description}</div>
+        <div className="md:line-clamp-2 line-clamp-3 mt-2">{description}</div>
         <div className="mt-4 flex gap-2 flex-wrap">
           {technologies.map((tech) => {
             return (

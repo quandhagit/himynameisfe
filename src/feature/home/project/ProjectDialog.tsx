@@ -1,6 +1,5 @@
 import Dialog from "@/components/common/Dialog";
 import { Project } from "@/redux/home/project/projectSlice";
-import { Workspace } from "@/redux/home/workspace/workspaceSlice";
 import React, { useMemo } from "react";
 
 type ProjectDialogProps = {

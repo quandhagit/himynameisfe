@@ -1,4 +1,14 @@
 {
-  "extends": ["next", "prettier"],
-  "rules": { "react/no-unescaped-entities": 0 }
+  "extends": [
+    "next",
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react/no-unescaped-entities": 0,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error"
+  }
 }

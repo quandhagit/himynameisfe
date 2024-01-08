@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { GET_DAILY } from "@/apollo/features/daily/queries/dailyQueries";
 import { getClient } from "@/apollo/client/apollo-client-server-component";
-import { gql } from "@apollo/client";
 import { Daily } from "@/models/daily";
 
 export const revalidate = 5;

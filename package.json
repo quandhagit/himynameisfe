@@ -27,7 +27,7 @@
     "autoprefixer": "10.4.14",
     "axios": "^1.6.3",
     "clsx": "^2.0.0",
-    "eslint": "8.45.0",
+    "eslint": "^8.56.0",
     "eslint-config-next": "13.4.10",
     "graphql": "^16.7.1",
     "graphql-yoga": "^4.0.3",
@@ -44,9 +44,11 @@
   },
   "devDependencies": {
     "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
     "eslint-config-prettier": "^9.0.0",
     "prisma": "^5.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.3.3"
   }
 }

@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://countriesnow.space/api/v0.1/",
-  isServer = typeof window === "undefined";
+const baseURL = "https://countriesnow.space/api/v0.1/";
 
 const api = axios.create({
   baseURL,

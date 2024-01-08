@@ -15,7 +15,7 @@ const Project = () => {
 
   const handleCloseDialog = useCallback(() => {
     dispatch(selectProject(""));
-  }, []);
+  }, [dispatch]);
 
   return (
     <section

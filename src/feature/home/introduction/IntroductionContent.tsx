@@ -1,7 +1,4 @@
 import { Button } from "@mui/material";
-import qImage from "../../../public/images/q.png";
-import avatar from "../../../public/images/avatar.png";
-import Image from "next/image";
 import React from "react";
 import ContactInfo from "../contact/ContactInfo";
 

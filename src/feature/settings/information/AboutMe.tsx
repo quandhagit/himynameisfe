@@ -4,14 +4,7 @@ import { Divider } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { Noto_Color_Emoji } from "next/font/google";
 import React, { useMemo } from "react";
-import {
-  Control,
-  FieldErrors,
-  FieldValues,
-  UseFormRegister,
-  UseFormWatch,
-  useFormContext,
-} from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 const countryFont = Noto_Color_Emoji({ weight: "400", subsets: ["emoji"] });
 
@@ -39,6 +32,8 @@ const AboutMe: React.FC = () => {
         ).then((res) => res.json()),
     });
 
+  const inputCountry = watch("country");
+
   const countryOptions = useMemo(() => {
     return (countries?.data || [])
       .sort((a, b) => a.name.localeCompare(b.name))
@@ -59,7 +54,7 @@ const AboutMe: React.FC = () => {
 
   const cityOptions = useMemo(() => {
     const selectedCountry = (countries?.data || []).find(
-      (country) => country.name === watch("country")
+      (country) => country.name === inputCountry
     );
 
     if (!selectedCountry || !selectedCountry.cities) return [];
@@ -70,7 +65,7 @@ const AboutMe: React.FC = () => {
         label: city,
       };
     });
-  }, [countries, watch("country")]);
+  }, [countries, inputCountry]);
 
   return (
     <div className="w-full">

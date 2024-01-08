@@ -52,7 +52,7 @@ const Header: React.FC = () => {
         </Link>
       </>
     );
-  }, [HOME_MENU_IDS]);
+  }, []);
 
   const handleCloseSidebar = () => {
     setOpenSidebar(false);

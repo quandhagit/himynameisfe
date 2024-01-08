@@ -5,7 +5,6 @@ export type CreateDailyResolverArgs = {
 };
 
 export const createDaily = async (
-  parent: any,
   args: CreateDailyResolverArgs,
   context: PrismaClient
 ) => {

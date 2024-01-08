@@ -12,9 +12,12 @@ const WorkspaceList = () => {
 
   const { projectList } = useAppSelector((state) => state.projectSlice);
 
-  const handleProjectClick = useCallback((id: string) => {
-    dispatch(selectProject(id));
-  }, []);
+  const handleProjectClick = useCallback(
+    (id: string) => {
+      dispatch(selectProject(id));
+    },
+    [dispatch]
+  );
 
   return (
     <div>

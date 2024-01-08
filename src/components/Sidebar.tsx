@@ -1,7 +1,5 @@
-import { HOME_MENU_IDS } from "@/constant/home/common";
 import { Button, Drawer } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Link from "next/link";
 import clsx from "clsx";
 import { ReactNode } from "react";
 

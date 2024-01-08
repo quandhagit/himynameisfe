@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type DetectScrollType = {
   isScrollOnTop: boolean;

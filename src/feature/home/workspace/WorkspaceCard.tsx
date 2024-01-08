@@ -36,7 +36,7 @@ const WorkspaceCard = ({
 
   const handleCardClick = useCallback(() => {
     onClick(workspaceId);
-  }, [workspaceId]);
+  }, [workspaceId, onClick]);
 
   return (
     <div className="relative" style={{ zIndex: length - index }}>

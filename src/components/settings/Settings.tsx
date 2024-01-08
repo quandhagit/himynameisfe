@@ -1,7 +1,7 @@
 "use client";
 
 import { SETTING_TABS, SettingTabType } from "@/constant/settings/common";
-import SettingExperience from "@/feature/settings/experience/SettingExperience";
+import SettingExperience from "@/feature/settings/workspace/SettingWorkspace";
 import SettingInformation from "@/feature/settings/information/SettingInformation";
 import SettingProject from "@/feature/settings/project/SettingProject";
 import { Box, Tab, Tabs } from "@mui/material";

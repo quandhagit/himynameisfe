@@ -11,9 +11,12 @@ const WorkspaceList = () => {
 
   const { workspaceList } = useAppSelector((state) => state.workspaceSlice);
 
-  const handleClickCard = useCallback((workspaceId: string) => {
-    dispatch(selectWorkspace(workspaceId));
-  }, []);
+  const handleClickCard = useCallback(
+    (workspaceId: string) => {
+      dispatch(selectWorkspace(workspaceId));
+    },
+    [dispatch]
+  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mt-16 w-full snake-grid">

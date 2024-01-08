@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import IntroductionContent from "@/feature/home/introduction/IntroductionContent";
 import Avatar from "@/feature/home/introduction/Avatar";
