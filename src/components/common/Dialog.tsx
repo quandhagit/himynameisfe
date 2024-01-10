@@ -24,6 +24,7 @@ const CommonDialog: React.FC<CommonDialogProps> = (props) => {
         sx: {
           maxHeight: "80vh",
           paddingY: "2rem",
+          minWidth: "45vw",
         },
       }}
     >

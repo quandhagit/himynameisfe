@@ -7,7 +7,7 @@ import SettingProject from "@/feature/settings/project/SettingProject";
 import { Box, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 
-const Settings = () => {
+const Settings: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<SettingTabType>(
     SETTING_TABS.INFORMATION
   );

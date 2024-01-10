@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { InputBaseComponentProps, TextField, styled } from "@mui/material";
 import {
+  Control,
   Controller,
   FieldErrors,
   FieldValues,
@@ -9,7 +10,7 @@ import {
 } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 
-type InputProps = {
+type InputProps<FieldValueType extends FieldValues> = {
   label: string;
   onValueChange?: (value: string) => void;
   multiline?: boolean;
@@ -17,16 +18,19 @@ type InputProps = {
   type?: React.HTMLInputTypeAttribute;
   placeholder?: string;
   required?: boolean;
-  register?: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<FieldValueType>;
   inputProps?: InputBaseComponentProps;
   isDisabled?: boolean;
   registerName?: string;
   validationErrorMessage?: string;
   pattern?: RegExp;
-  errors?: FieldErrors<FieldValues>;
+  errors?: FieldErrors<FieldValueType>;
+  control?: Control<FieldValueType>;
 };
 
-const Input: React.FC<InputProps> = (props) => {
+function Input<FieldValueType extends FieldValues>(
+  props: InputProps<FieldValueType>
+) {
   const Input = styled(TextField)(() => ({
     "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
       display: "none",
@@ -44,10 +48,7 @@ const Input: React.FC<InputProps> = (props) => {
     borderColor: "#c4c2c2",
   }));
 
-  const {
-    formState: { errors },
-    control,
-  } = useFormContext();
+  const form = useFormContext();
 
   const {
     label,
@@ -62,6 +63,8 @@ const Input: React.FC<InputProps> = (props) => {
     registerName = "",
     validationErrorMessage = "",
     pattern = /()/,
+    errors,
+    control,
   } = props;
 
   const [isTyping, setIsTyping] = useState(false);
@@ -74,6 +77,31 @@ const Input: React.FC<InputProps> = (props) => {
     }
   };
 
+  if (!control && !form?.control) {
+    return (
+      <div className="w-full">
+        <div className="mb-1">
+          {label}
+          {required && <span className="text-red-600 ml-0.5">*</span>}
+        </div>
+        <Input
+          name={registerName}
+          disabled={isDisabled}
+          fullWidth
+          multiline={multiline}
+          rows={rows}
+          size="small"
+          type={type}
+          inputProps={inputProps}
+          placeholder={placeholder}
+          onChange={(event) => {
+            handleOnChange(event);
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full">
       <div className="mb-1">
@@ -81,7 +109,7 @@ const Input: React.FC<InputProps> = (props) => {
         {required && <span className="text-red-600 ml-0.5">*</span>}
       </div>
       <Controller
-        control={control}
+        control={form?.control}
         name={registerName}
         disabled={isDisabled}
         rules={{
@@ -91,6 +119,7 @@ const Input: React.FC<InputProps> = (props) => {
         render={({ field: { onChange, value, onBlur } }) => {
           return (
             <Input
+              name={registerName}
               disabled={isDisabled}
               fullWidth
               multiline={multiline}
@@ -114,9 +143,9 @@ const Input: React.FC<InputProps> = (props) => {
           );
         }}
       />
-      {!isTyping && errors && (
+      {!isTyping && (errors || form?.formState.errors) && (
         <ErrorMessage
-          errors={errors}
+          errors={errors || form.formState.errors}
           name={registerName}
           render={({ message }) => (
             <div className="text-red-600 mt-1">{message}</div>
@@ -125,6 +154,6 @@ const Input: React.FC<InputProps> = (props) => {
       )}
     </div>
   );
-};
+}
 
 export default Input;

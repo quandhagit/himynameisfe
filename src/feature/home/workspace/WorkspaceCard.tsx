@@ -9,12 +9,12 @@ type WorkspaceCardProps = {
   onClick: (id: string) => void;
 };
 
-const WorkspaceCard = ({
+const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
   workspace,
   index,
   length,
   onClick,
-}: WorkspaceCardProps) => {
+}) => {
   const {
     id: workspaceId,
     startDate,

@@ -1,22 +1,10 @@
 "use client";
 
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import WorkspaceList from "@/feature/home/workspace/WorkspaceList";
-import WorkspaceDialog from "../../../feature/home/workspace/WorkspaceDialog";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { selectWorkspace } from "@/redux/home/workspace/workspaceSlice";
 import { HOME_MENU_IDS } from "@/constant/home/common";
 
 const Workspace = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { selectedWorkspace } = useAppSelector((state) => state.workspaceSlice);
-
-  const handleCloseDialog = useCallback(() => {
-    dispatch(selectWorkspace(""));
-  }, [dispatch]);
-
   return (
     <section
       id={HOME_MENU_IDS.EXPERIENCE}
@@ -29,13 +17,6 @@ const Workspace = () => {
         </div>
       </div>
       <WorkspaceList />
-      {selectedWorkspace && (
-        <WorkspaceDialog
-          workspace={selectedWorkspace}
-          onClose={handleCloseDialog}
-          isOpen={!!selectedWorkspace}
-        />
-      )}
     </section>
   );
 };

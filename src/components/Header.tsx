@@ -62,6 +62,8 @@ const Header: React.FC = () => {
     if (isMiddleScreen) {
       setOpenSidebar(false);
     }
+
+    window.history.scrollRestoration = "manual";
   }, [isMiddleScreen]);
 
   return (

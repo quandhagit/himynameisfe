@@ -6,11 +6,18 @@ import ProjectCard from "./ProjectCard";
 import { Pagination, Stack } from "@mui/material";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectProject } from "@/redux/home/project/projectSlice";
+import ProjectDialog from "./ProjectDialog";
 
-const WorkspaceList = () => {
+const ProjectList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { projectList } = useAppSelector((state) => state.projectSlice);
+  const { projectList, selectedProject } = useAppSelector(
+    (state) => state.projectSlice
+  );
+
+  const handleCloseDialog = useCallback(() => {
+    dispatch(selectProject(""));
+  }, [dispatch]);
 
   const handleProjectClick = useCallback(
     (id: string) => {
@@ -35,8 +42,15 @@ const WorkspaceList = () => {
       <Stack alignItems="center" marginTop={6}>
         <Pagination count={2} color="primary" />
       </Stack>
+      {selectedProject && (
+        <ProjectDialog
+          project={selectedProject}
+          onClose={handleCloseDialog}
+          isOpen={!!selectedProject}
+        />
+      )}
     </div>
   );
 };
 
-export default WorkspaceList;
+export default ProjectList;

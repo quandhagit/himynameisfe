@@ -5,13 +5,32 @@ import DefaultInformation from "./DefaultInformation";
 import AboutMe from "./AboutMe";
 import ExternalLink from "./ExternalLink";
 
-const SettingInformation = () => {
-  const form = useForm({ mode: "onBlur", reValidateMode: "onBlur" });
+const SettingInformation: React.FC = () => {
+  const form = useForm({
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+    defaultValues: {
+      lastName: "",
+      firstName: "",
+      email: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      country: "",
+      city: undefined,
+      address: undefined,
+      role: "",
+      shortDescription: "",
+      description: "",
+      facebookUrl: "",
+      linkedInUrl: "",
+      githubUrl: "",
+    },
+  });
 
   const {
     handleSubmit,
     reset,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = form;
 
   return (
@@ -31,7 +50,10 @@ const SettingInformation = () => {
               variant="outlined"
               size="large"
               className="w-24"
-              onClick={reset}
+              onClick={() => {
+                reset();
+              }}
+              disabled={!isDirty}
             >
               Reset
             </Button>

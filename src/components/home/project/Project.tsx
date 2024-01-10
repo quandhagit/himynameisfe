@@ -1,22 +1,8 @@
-"use client";
-
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import ProjectList from "@/feature/home/project/ProjectList";
-import ProjectDialog from "@/feature/home/project/ProjectDialog";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { selectProject } from "@/redux/home/project/projectSlice";
 import { HOME_MENU_IDS } from "@/constant/home/common";
 
-const Project = () => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { selectedProject } = useAppSelector((state) => state.projectSlice);
-
-  const handleCloseDialog = useCallback(() => {
-    dispatch(selectProject(""));
-  }, [dispatch]);
-
+const Project: React.FC = () => {
   return (
     <section
       id={HOME_MENU_IDS.PROJECT}
@@ -27,13 +13,6 @@ const Project = () => {
         <div className="mt-3 text-2xl font-bold">Recent completed works</div>
       </div>
       <ProjectList />
-      {selectedProject && (
-        <ProjectDialog
-          project={selectedProject}
-          onClose={handleCloseDialog}
-          isOpen={!!selectedProject}
-        />
-      )}
     </section>
   );
 };

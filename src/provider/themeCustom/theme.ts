@@ -9,7 +9,7 @@ const inter = Poppins({
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#ee1042",
+      main: "#dc2626",
     },
     secondary: {
       main: "#edf2ff",

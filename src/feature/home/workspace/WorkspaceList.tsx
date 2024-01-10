@@ -5,11 +5,18 @@ import { useDispatch } from "react-redux";
 import WorkspaceCard from "./WorkspaceCard";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { selectWorkspace } from "@/redux/home/workspace/workspaceSlice";
+import WorkspaceDialog from "./WorkspaceDialog";
 
-const WorkspaceList = () => {
+const WorkspaceList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { workspaceList } = useAppSelector((state) => state.workspaceSlice);
+  const { workspaceList, selectedWorkspace } = useAppSelector(
+    (state) => state.workspaceSlice
+  );
+
+  const handleCloseDialog = useCallback(() => {
+    dispatch(selectWorkspace(""));
+  }, [dispatch]);
 
   const handleClickCard = useCallback(
     (workspaceId: string) => {
@@ -31,6 +38,13 @@ const WorkspaceList = () => {
           />
         );
       })}
+      {selectedWorkspace && (
+        <WorkspaceDialog
+          workspace={selectedWorkspace}
+          onClose={handleCloseDialog}
+          isOpen={!!selectedWorkspace}
+        />
+      )}
     </div>
   );
 };
