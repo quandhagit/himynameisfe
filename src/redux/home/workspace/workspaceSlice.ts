@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const dumbData = [
   {
     id: "1",
-    startDate: "7/2023",
+    startDate: "1/7/2023",
     endDate: "",
     company: "NCC Plus 1",
     role: "Frontend Developer",
@@ -14,8 +14,8 @@ const dumbData = [
   },
   {
     id: "2",
-    startDate: "5/2022",
-    endDate: "7/2023",
+    startDate: "1/5/2022",
+    endDate: "1/7/2023",
     company: "Rikkei soft 2",
     role: "Frontend Developer",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -23,8 +23,8 @@ const dumbData = [
   },
   {
     id: "3",
-    startDate: "5/2021",
-    endDate: "11/2021",
+    startDate: "1/5/2021",
+    endDate: "1/11/2021",
     company: "FPT soft 3",
     role: "Frontend Developer",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",

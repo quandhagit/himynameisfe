@@ -4,7 +4,7 @@ import Dialog from "@/components/common/Dialog";
 import Input from "@/components/common/Input";
 import { Workspace } from "@/redux/home/workspace/workspaceSlice";
 import { Button } from "@mui/material";
-import React, { useMemo } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 type SettingWorkspaceDialogProps = {
@@ -39,39 +39,13 @@ const SettingWorkspaceDialog: React.FC<SettingWorkspaceDialogProps> = (
     },
   });
 
-  const workDateRange = useMemo(() => {
-    if (!startDate && !endDate) return "";
-
-    if (!endDate) {
-      return startDate + " - present";
-    }
-
-    return startDate + " - " + endDate;
-  }, [startDate, endDate]);
-
   return (
-    <Dialog isOpen={isOpen} imageUrl={image} onClose={onClose}>
-      <form
-        id={id}
-        onSubmit={handleSubmit((data) => {
-          console.log(data);
-          alert(JSON.stringify(data));
-        })}
-      >
-        <div className="flex gap-5 w-full mt-4">
-          <div className="text-yellow-600">{workDateRange}</div>
-          <div className="">{company}</div>
-        </div>
-        <div className="text-xl mt-2 text-blue-950 font-semibold">{role}</div>
-        <Input
-          registerName="description"
-          label="Description"
-          multiline
-          control={control}
-          rows={5}
-          placeholder="Enter something about you"
-        />
-        <div className="flex mt-2 gap-5 justify-end">
+    <Dialog
+      isOpen={isOpen}
+      imageUrl={image}
+      onClose={onClose}
+      footer={
+        <div className="flex gap-5 justify-end px-8 py-4">
           <Button
             variant="outlined"
             size="large"
@@ -89,9 +63,57 @@ const SettingWorkspaceDialog: React.FC<SettingWorkspaceDialogProps> = (
             className="w-24"
             type="submit"
             disabled={!isValid}
+            onClick={handleSubmit((data) => {
+              console.log(data);
+              alert(JSON.stringify(data));
+            })}
           >
             Save
           </Button>
+        </div>
+      }
+    >
+      <form id={id}>
+        <div className="flex flex-col gap-4 py-4">
+          <div className="flex gap-4 flex-col sm:flex-row">
+            <Input
+              registerName="startDate"
+              label="Start Date"
+              type="date"
+              placeholder="Enter your start date"
+              control={control}
+              required
+            />
+            <Input
+              registerName="endDate"
+              label="End Date"
+              type="date"
+              control={control}
+              placeholder="Enter your end date"
+            />
+          </div>
+          <Input
+            registerName="company"
+            label="Company"
+            placeholder="Enter your company"
+            control={control}
+            required
+          />
+          <Input
+            registerName="role"
+            label="Role"
+            placeholder="Enter your work role"
+            control={control}
+            required
+          />
+          <Input
+            registerName="description"
+            label="Description"
+            multiline
+            control={control}
+            rows={5}
+            placeholder="Enter something about you"
+          />
         </div>
       </form>
     </Dialog>

@@ -8,12 +8,13 @@ type CommonDialogProps = {
   isOpen?: boolean;
   onClose?: () => void;
   children: ReactNode;
+  footer?: ReactNode;
 };
 
 const CommonDialog: React.FC<CommonDialogProps> = (props) => {
   const isSmallScreen = useMatchMedia("(max-width: 640px)");
 
-  const { imageUrl, isOpen = false, onClose, children } = props;
+  const { imageUrl, isOpen = false, onClose, children, footer } = props;
 
   return (
     <Dialog
@@ -22,13 +23,13 @@ const CommonDialog: React.FC<CommonDialogProps> = (props) => {
       maxWidth="md"
       PaperProps={{
         sx: {
-          maxHeight: "80vh",
-          paddingY: "2rem",
+          paddingTop: "2rem",
+          paddingBottom: footer ? "0rem" : "2rem",
           minWidth: "45vw",
         },
       }}
     >
-      <div className="w-full h-full overflow-y-auto px-8">
+      <div className="w-full h-full overflow-y-auto px-8 max-h-[70vh]">
         {imageUrl && (
           <Image
             alt="common"
@@ -46,6 +47,7 @@ const CommonDialog: React.FC<CommonDialogProps> = (props) => {
         )}
         <div className="break-words">{children}</div>
       </div>
+      {footer}
     </Dialog>
   );
 };
