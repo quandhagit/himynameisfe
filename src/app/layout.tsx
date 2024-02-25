@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ReduxProvider from "@/redux/ReduxProvider";
 import ReactQueryProvider from "@/provider/reactQuery/ReactQueryProvider";
 import { Suspense } from "react";
+import SessionProvider from "@/components/providers/SessionProvider";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -35,13 +36,15 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
             <Suspense fallback={null}>
               <ApolloProviders>
                 <ReduxProvider>
-                  <ThemeRegistry options={{ key: "mui", prepend: true }}>
-                    <Header />
-                    <div className="selection:bg-red-300 min-h-screen">
-                      {props.children}
-                    </div>
-                    <Footer />
-                  </ThemeRegistry>
+                  <SessionProvider>
+                    <ThemeRegistry options={{ key: "mui", prepend: true }}>
+                      <Header />
+                      <div className="selection:bg-red-300 min-h-screen">
+                        {props.children}
+                      </div>
+                      <Footer />
+                    </ThemeRegistry>
+                  </SessionProvider>
                 </ReduxProvider>
               </ApolloProviders>
             </Suspense>
