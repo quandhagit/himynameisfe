@@ -10,11 +10,15 @@ import useMatchMedia from "@/utils/useMatchMedia";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import useDetectScroll from "@/utils/useDetectScrollOnTop";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
   const { isScrollOnTop } = useDetectScroll();
+  const router = useRouter();
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
@@ -96,18 +100,25 @@ const Header: React.FC = () => {
                 backgroundColor: "black",
                 ":hover": { opacity: 0.8, backgroundColor: "black" },
               }}
+              onClick={() => {
+                router.push("/login");
+              }}
             >
               Login
             </Button>
           </div>
-          <button
-            className="cursor-pointer flex lg:hidden border-none hover:bg-red-100 rounded bg-transparent"
-            onClick={() => {
-              setOpenSidebar(true);
-            }}
-          >
-            <MenuIcon sx={{ fontSize: 35 }} />
-          </button>
+          {session && session.user ? (
+            <div>{session.user.name}</div>
+          ) : (
+            <button
+              className="cursor-pointer flex lg:hidden border-none hover:bg-red-100 rounded bg-transparent"
+              onClick={() => {
+                setOpenSidebar(true);
+              }}
+            >
+              <MenuIcon sx={{ fontSize: 35 }} />
+            </button>
+          )}
         </div>
       </nav>
       <Sidebar
