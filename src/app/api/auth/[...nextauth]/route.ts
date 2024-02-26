@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials): Promise<any> {
-        return await signInWithEmailAndPassword(
+        const userCredential = await signInWithEmailAndPassword(
           auth,
           credentials?.email || "",
           credentials?.password || ""
@@ -29,13 +29,32 @@ export const authOptions: NextAuthOptions = {
           .catch((error) => {
             console.log(error);
           });
+        if (!userCredential) {
+          return null;
+        }
+
+        const accessToken = await userCredential.getIdToken(true);
+
+        return {
+          user: userCredential.providerData[0],
+          accessToken,
+        };
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
       console.log(user);
+      if (user) {
+        return { ...token, ...user };
+      }
+
       return token;
+    },
+    async session({ token, session }) {
+      session.user = token.user;
+      session.accessToken = token.accessToken;
+      return session;
     },
   },
 };

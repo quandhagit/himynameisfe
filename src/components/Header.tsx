@@ -93,32 +93,33 @@ const Header: React.FC = () => {
             {tabElements}
           </div>
           <div className="hidden lg:flex">
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                backgroundColor: "black",
-                ":hover": { opacity: 0.8, backgroundColor: "black" },
-              }}
-              onClick={() => {
-                router.push("/login");
-              }}
-            >
-              Login
-            </Button>
+            {session && session.user ? (
+              <div>{session.user.displayName}</div>
+            ) : (
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  backgroundColor: "black",
+                  ":hover": { opacity: 0.8, backgroundColor: "black" },
+                }}
+                onClick={() => {
+                  router.push("/login");
+                }}
+              >
+                Login
+              </Button>
+            )}
           </div>
-          {session && session.user ? (
-            <div>{session.user.name}</div>
-          ) : (
-            <button
-              className="cursor-pointer flex lg:hidden border-none hover:bg-red-100 rounded bg-transparent"
-              onClick={() => {
-                setOpenSidebar(true);
-              }}
-            >
-              <MenuIcon sx={{ fontSize: 35 }} />
-            </button>
-          )}
+
+          <button
+            className="cursor-pointer flex lg:hidden border-none hover:bg-red-100 rounded bg-transparent"
+            onClick={() => {
+              setOpenSidebar(true);
+            }}
+          >
+            <MenuIcon sx={{ fontSize: 35 }} />
+          </button>
         </div>
       </nav>
       <Sidebar
