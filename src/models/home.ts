@@ -18,7 +18,6 @@ export type UserProfile = {
 
 export type UserProject = {
   id: string;
-  profileId: string;
   name: string;
   startTime: Date;
   endTime: Date;
@@ -27,7 +26,6 @@ export type UserProject = {
 
 export type UserWorkspace = {
   id: string;
-  profileId: string;
   companyName: string;
   image: string;
   role: string;
@@ -37,8 +35,6 @@ export type UserWorkspace = {
 };
 
 export type UserLink = {
-  id: string;
-  profileId: string;
   facebookUrl: string;
   githubUrl: string;
   linkedInUrl: string;

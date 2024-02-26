@@ -4,7 +4,7 @@ import {
   UserProject,
   UserWorkspace,
 } from "@/models/home";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 type HomeContextData = {
   loading: boolean;
@@ -14,10 +14,72 @@ type HomeContextData = {
   refLinks: UserLink;
 };
 
-const HomeContext = createContext<HomeContextData>({});
+const HomeContext = createContext<HomeContextData>({
+  loading: false,
+  profile: {
+    id: "",
+    profileId: "",
+    firstName: "",
+    lastName: "",
+    dateOfBirth: new Date(),
+    phoneNumber: "",
+    avatar: "",
+    email: "",
+    country: "",
+    city: "",
+    address: "",
+    role: "",
+    shortDescription: "",
+    fullDescription: "",
+    public: true,
+  },
+  projects: [],
+  workspaces: [],
+  refLinks: {
+    facebookUrl: "",
+    githubUrl: "",
+    linkedInUrl: "",
+  },
+});
 
-const useHomeContext = () => {
-  return {};
+export const useCall = () => useContext(HomeContext);
+
+export const HomeContextProvider = HomeContext.Provider;
+
+type HomeLogicResult = {
+  data: HomeContextData;
+};
+
+export const useHomeContext = (): HomeLogicResult => {
+  return {
+    data: {
+      loading: false,
+      profile: {
+        id: "",
+        profileId: "",
+        firstName: "",
+        lastName: "",
+        dateOfBirth: new Date(),
+        phoneNumber: "",
+        avatar: "",
+        email: "",
+        country: "",
+        city: "",
+        address: "",
+        role: "",
+        shortDescription: "",
+        fullDescription: "",
+        public: true,
+      },
+      projects: [],
+      workspaces: [],
+      refLinks: {
+        facebookUrl: "",
+        githubUrl: "",
+        linkedInUrl: "",
+      },
+    },
+  };
 };
 
 export default useHomeContext;
