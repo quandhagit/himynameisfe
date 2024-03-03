@@ -12,6 +12,7 @@ import clsx from "clsx";
 import useDetectScroll from "@/utils/useDetectScrollOnTop";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import AppLogo from "../AppLogo";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
@@ -81,20 +82,13 @@ const Header: React.FC = () => {
         )}
       >
         <div className="flex items-center gap-3 justify-between w-full">
-          <Link className="text-3xl font-bold mr-2 no-underline" href={"/"}>
-            <div className="text-red-700 font-mono">
-              Hi
-              <span className="text-white bg-red-700 px-3 rounded">
-                MyNameIs
-              </span>
-            </div>
-          </Link>
+          <AppLogo />
           <div className="lg:flex xl:max-w-[50%] gap-6 w-3/5 hidden justify-between font-bold">
             {tabElements}
           </div>
           <div className="hidden lg:flex">
             {session && session.user ? (
-              <div>{session.user.displayName}</div>
+              <div>{session.user.lastName}</div>
             ) : (
               <Button
                 variant="contained"

@@ -1,6 +1,5 @@
-export type UserProfile = {
+export type User = {
   id: string;
-  profileId: string;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
@@ -11,12 +10,17 @@ export type UserProfile = {
   city: string;
   address: string;
   role: string;
+};
+
+export type Profile = {
+  id: string;
   shortDescription: string;
   fullDescription: string;
   public: boolean;
+  role: string;
 };
 
-export type UserProject = {
+export type Project = {
   id: string;
   name: string;
   startTime: Date;
@@ -24,7 +28,7 @@ export type UserProject = {
   description: string;
 };
 
-export type UserWorkspace = {
+export type Workspace = {
   id: string;
   companyName: string;
   image: string;
@@ -34,7 +38,7 @@ export type UserWorkspace = {
   description: string;
 };
 
-export type UserLink = {
+export type Link = {
   facebookUrl: string;
   githubUrl: string;
   linkedInUrl: string;

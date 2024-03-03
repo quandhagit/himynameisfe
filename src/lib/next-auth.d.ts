@@ -1,21 +1,15 @@
-import NextAuth from "next-auth";
+import { User } from "@/models/home";
 
 declare module "next-auth" {
   interface Session {
-    user: {
-      displayName: string;
-      email: string;
-    };
+    user: User;
     accessToken: string;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    user: {
-      displayName: string;
-      email: string;
-    };
+    user: User;
     accessToken: string;
   }
 }

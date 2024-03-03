@@ -1,24 +1,19 @@
-import {
-  UserLink,
-  UserProfile,
-  UserProject,
-  UserWorkspace,
-} from "@/models/home";
+import { User, Link, Profile, Project, Workspace } from "@/models/home";
 import { createContext, useContext } from "react";
 
 type HomeContextData = {
   loading: boolean;
-  profile: UserProfile;
-  projects: UserProject[];
-  workspaces: UserWorkspace[];
-  refLinks: UserLink;
+  userInfo: User;
+  profile: Profile;
+  projects: Project[];
+  workspaces: Workspace[];
+  refLinks: Link;
 };
 
 const HomeContext = createContext<HomeContextData>({
   loading: false,
-  profile: {
+  userInfo: {
     id: "",
-    profileId: "",
     firstName: "",
     lastName: "",
     dateOfBirth: new Date(),
@@ -28,6 +23,10 @@ const HomeContext = createContext<HomeContextData>({
     country: "",
     city: "",
     address: "",
+    role: "",
+  },
+  profile: {
+    id: "",
     role: "",
     shortDescription: "",
     fullDescription: "",
@@ -54,9 +53,8 @@ export const useHomeContext = (): HomeLogicResult => {
   return {
     data: {
       loading: false,
-      profile: {
+      userInfo: {
         id: "",
-        profileId: "",
         firstName: "",
         lastName: "",
         dateOfBirth: new Date(),
@@ -66,6 +64,10 @@ export const useHomeContext = (): HomeLogicResult => {
         country: "",
         city: "",
         address: "",
+        role: "",
+      },
+      profile: {
+        id: "",
         role: "",
         shortDescription: "",
         fullDescription: "",
