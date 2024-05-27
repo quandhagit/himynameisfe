@@ -28,6 +28,19 @@ export const useUserRegisterMutation = (): UseMutationResult<
   return useMutation({
     mutationKey: ["userRegister"],
     mutationFn: (data: UserRegisterInputType) =>
-      apiAuth.post("/register", data),
+      apiAuth.post("/auth/register", data),
+  });
+};
+
+export const useUserEmailVerifyMutation = (): UseMutationResult<
+  User,
+  Error,
+  boolean,
+  unknown
+> => {
+  const apiAuth = useAxiosAuth();
+  return useMutation({
+    mutationKey: ["userEmailVerify"],
+    mutationFn: (data: boolean) => apiAuth.patch("/auth/verify-email", data),
   });
 };

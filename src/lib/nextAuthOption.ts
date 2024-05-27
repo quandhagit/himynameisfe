@@ -1,6 +1,9 @@
 import { auth } from "@/config/firebase";
 import { User } from "@/models/home";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -48,8 +51,13 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        // if (!userCredential.emailVerified) {
+        //   sendEmailVerification(userCredential);
+        // }
+
         const accessToken = await userCredential.getIdToken(true);
         const userInfo = await getUser(userCredential.uid, accessToken);
+
         return {
           id: userInfo.id,
           user: userInfo,
@@ -60,7 +68,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log(user);
+      console.log("jwt callback:", user);
       if (user) {
         return { ...token, ...user };
       }

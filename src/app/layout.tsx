@@ -7,6 +7,7 @@ import ReduxProvider from "@/redux/ReduxProvider";
 import ReactQueryProvider from "@/provider/reactQuery/ReactQueryProvider";
 import { Suspense } from "react";
 import SessionProvider from "@/components/providers/SessionProvider";
+import PageLayout from "@/components/layout/PageLayout";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -42,7 +43,9 @@ const RootLayout: React.FC<DashboardLayoutProps> = (props) => {
                   <SessionProvider>
                     <ThemeRegistry options={{ key: "mui", prepend: true }}>
                       <div className="selection:bg-red-300 min-h-screen">
-                        {props.children}
+                        <PageLayout layout={"InternalLayout"}>
+                          {props.children}
+                        </PageLayout>
                       </div>
                     </ThemeRegistry>
                   </SessionProvider>

@@ -5,14 +5,6 @@ import { useEffect } from "react";
 import api from "./api";
 import { auth } from "../firebase";
 
-// todo if have expired token
-// export const SESSION_LOGIN_ENTRY_URL = "session-login-entry-url";
-
-// function saveCurrentUrlForNextLogin() {
-//   const url = window.location.pathname + window.location.search;
-//   window.sessionStorage.setItem(SESSION_LOGIN_ENTRY_URL, url);
-// }
-
 const useAxiosAuth = () => {
   const { data: session } = useSession();
 

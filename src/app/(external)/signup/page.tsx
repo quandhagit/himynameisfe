@@ -32,7 +32,11 @@ const Signup: React.FC = () => {
   const { mutate } = useUserRegisterMutation();
 
   const signUp = async (data: UserRegisterInputType) => {
-    mutate(data, { onSuccess: () => {} });
+    mutate(data, {
+      onSuccess: () => {
+        location.href = "/login";
+      },
+    });
   };
 
   return (
@@ -47,7 +51,7 @@ const Signup: React.FC = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex flex-col items-center px-10 pb-8 mt-20 mx-auto lg:w-1/2 w-full overflow-y-auto">
+      <div className="flex flex-col items-center px-10 pb-20 mt-20 mx-auto lg:w-1/2 w-full overflow-y-auto">
         <div className="max-w-xl">
           <h1>Welcome to HiMyNameIs</h1>
           <div className="text-gray-400">
@@ -96,6 +100,24 @@ const Signup: React.FC = () => {
                 required
                 type="number"
                 inputProps={{ inputMode: "tel" }}
+              />
+              <Input
+                registerName="password"
+                label="Password"
+                placeholder="Enter your password"
+                required
+                pattern={
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+                }
+                type="password"
+                validationErrorMessage="Password requiring at least 8 characters and must contain lowercase, uppercase, number and special character"
+              />
+              <Input
+                registerName="confirmPassword"
+                label="Confirm Password"
+                placeholder="Please confirm your password"
+                required
+                type="password"
               />
               <div className="flex mt-2 gap-5 justify-end">
                 <Button

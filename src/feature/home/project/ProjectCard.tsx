@@ -41,10 +41,10 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
 
   return (
     <div
-      className="rounded relative h-auto min-h-[400px] overflow-hidden shadow-md  hover:-translate-y-3 transition cursor-pointer"
+      className="rounded-md fix-border relative h-auto min-h-[400px] overflow-hidden shadow-md hover:-translate-y-3 transition cursor-pointer"
       onClick={handleSelectProject}
     >
-      <div className="absolute top-8 right-0 py-1 px-2 rounded-l-xl bg-green-600 opacity-80 text-white font-bold">
+      <div className="absolute text-sm top-0 right-0 py-1 px-2 rounded-bl-md bg-blue-100 text-gray-800 font-medium">
         {workingTime}
       </div>
       <Image
@@ -53,7 +53,11 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
         width={0}
         height={0}
         sizes="100vw"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        }}
       />
       <div className="absolute bottom-0 h-auto min-h-[140px] bg-white w-full p-4">
         <div className="text-lg font-bold text-blue-950">{projectName}</div>

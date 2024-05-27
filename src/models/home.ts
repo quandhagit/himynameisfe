@@ -10,6 +10,7 @@ export type User = {
   city: string;
   address: string;
   role: string;
+  emailVerified: boolean;
 };
 
 export type Profile = {

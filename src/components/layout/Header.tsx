@@ -13,6 +13,7 @@ import useDetectScroll from "@/utils/useDetectScrollOnTop";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import AppLogo from "../AppLogo";
+import { auth } from "@/config/firebase";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
@@ -29,25 +30,13 @@ const Header: React.FC = () => {
     return (
       <>
         <Link className="no-underline text-black hover:text-red-600" href={"/"}>
-          Profile
+          Blogs
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
           href={"/settings"}
         >
           Settings
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"/settings"}
-        >
-          Dashboard
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"/daily"}
-        >
-          Daily
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
@@ -88,7 +77,22 @@ const Header: React.FC = () => {
           </div>
           <div className="hidden lg:flex">
             {session && session.user ? (
-              <div>{session.user.lastName}</div>
+              <div>
+                <div>{session.user.lastName}</div>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    backgroundColor: "black",
+                    ":hover": { opacity: 0.8, backgroundColor: "black" },
+                  }}
+                  onClick={() => {
+                    auth.signOut();
+                  }}
+                >
+                  Logout
+                </Button>
+              </div>
             ) : (
               <Button
                 variant="contained"

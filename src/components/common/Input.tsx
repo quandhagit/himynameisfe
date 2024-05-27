@@ -116,6 +116,14 @@ function Input<FieldValueType extends FieldValues>(
         rules={{
           required: { value: required, message: `${label} is required!` },
           pattern: { value: pattern, message: validationErrorMessage },
+          validate: (value) => {
+            if (registerName !== "confirmPassword") {
+              return true;
+            }
+            return (
+              value === form.watch("password") || "Password does not match"
+            );
+          },
         }}
         render={({ field: { onChange, value, onBlur } }) => {
           return (
