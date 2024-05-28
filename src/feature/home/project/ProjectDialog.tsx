@@ -44,7 +44,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = (props) => {
           return (
             <div
               key={tech}
-              className="rounded-full bg-red-500 px-2 py-1 text-white text-sm"
+              className="rounded-full bg-gray-900 px-2 py-1 text-white text-sm"
             >
               {tech}
             </div>
