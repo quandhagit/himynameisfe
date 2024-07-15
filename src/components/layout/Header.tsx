@@ -11,16 +11,16 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import useDetectScroll from "@/utils/useDetectScrollOnTop";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import AppLogo from "../AppLogo";
-import { auth } from "@/config/firebase";
+import { useAuthContext } from "@/provider/AuthProvider";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
   const { isScrollOnTop } = useDetectScroll();
   const router = useRouter();
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session } = useAuthContext();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
@@ -60,6 +60,8 @@ const Header: React.FC = () => {
     window.history.scrollRestoration = "manual";
   }, [isMiddleScreen]);
 
+  console.log(session);
+
   return (
     <>
       <nav
@@ -87,7 +89,7 @@ const Header: React.FC = () => {
                     ":hover": { opacity: 0.8, backgroundColor: "black" },
                   }}
                   onClick={() => {
-                    auth.signOut();
+                    signOut();
                   }}
                 >
                   Logout

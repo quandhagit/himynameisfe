@@ -36,6 +36,9 @@ const Signup: React.FC = () => {
       onSuccess: () => {
         location.href = "/login";
       },
+      onError(error) {
+        alert(error);
+      },
     });
   };
 

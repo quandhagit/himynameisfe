@@ -6,8 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import signUpBg from "public/images/signUpBg.jpg";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import { signIn } from "next-auth/react";
 
 type UserLogin = { email: string; password: string };
 
@@ -28,24 +27,12 @@ const Home: React.FC = () => {
 
   const login = async (data: UserLogin) => {
     const { email, password } = data;
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
+    signIn("credentials", {
       email,
-      password
-    )
-      .then((userCredential) => {
-        if (userCredential.user) {
-          return userCredential.user;
-        }
-        return null;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    if (!userCredential) {
-      return null;
-    }
+      password,
+      redirect: true,
+      callbackUrl: "/",
+    });
   };
 
   return (

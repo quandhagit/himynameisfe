@@ -7,10 +7,10 @@ export default function InternalLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <RequireSession>
-    // <PageLayout layout={"InternalLayout"}>
-    <>{children}</>
-    // </PageLayout>
-    // </RequireSession>
+    <RequireSession>
+      <PageLayout layout={"InternalLayout"}>
+        <>{children}</>
+      </PageLayout>
+    </RequireSession>
   );
 }
