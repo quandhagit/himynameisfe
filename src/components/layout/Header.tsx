@@ -11,9 +11,10 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import useDetectScroll from "@/utils/useDetectScrollOnTop";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import AppLogo from "../AppLogo";
 import { useAuthContext } from "@/provider/AuthProvider";
+import { auth } from "@/config/firebase";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
@@ -60,8 +61,6 @@ const Header: React.FC = () => {
     window.history.scrollRestoration = "manual";
   }, [isMiddleScreen]);
 
-  console.log(session);
-
   return (
     <>
       <nav
@@ -73,14 +72,14 @@ const Header: React.FC = () => {
         )}
       >
         <div className="flex items-center gap-3 justify-between w-full">
-          <AppLogo />
-          <div className="lg:flex xl:max-w-[50%] gap-6 w-3/5 hidden justify-between font-bold">
-            {tabElements}
+          <div className="flex items-center gap-10">
+            <AppLogo />
+            <div className="lg:flex gap-10 hidden font-bold">{tabElements}</div>
           </div>
           <div className="hidden lg:flex">
             {session && session.user ? (
-              <div>
-                <div>{session.user.lastName}</div>
+              <div className="flex items-center gap-4">
+                <div>{`${session.user.lastName} ${session.user.firstName}`}</div>
                 <Button
                   variant="contained"
                   size="large"
@@ -90,6 +89,7 @@ const Header: React.FC = () => {
                   }}
                   onClick={() => {
                     signOut();
+                    auth.signOut();
                   }}
                 >
                   Logout
