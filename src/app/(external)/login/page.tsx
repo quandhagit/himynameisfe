@@ -1,12 +1,13 @@
 "use client";
 import AppLogo from "@/components/AppLogo";
 import Input from "@/components/common/Input";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import signUpBg from "public/images/signUpBg.jpg";
 import { signIn } from "next-auth/react";
+import { useState } from "react";
 
 type UserLogin = { email: string; password: string };
 
@@ -25,13 +26,18 @@ const Home: React.FC = () => {
     formState: { isValid },
   } = form;
 
+  const [isLoading, setLoading] = useState(false);
+
   const login = async (data: UserLogin) => {
     const { email, password } = data;
-    signIn("credentials", {
+    setLoading(true);
+    await signIn("credentials", {
       email,
       password,
       redirect: true,
       callbackUrl: "/",
+    }).finally(() => {
+      setLoading(false);
     });
   };
 
@@ -83,9 +89,15 @@ const Home: React.FC = () => {
                 <Button
                   variant="contained"
                   size="large"
-                  className="w-full py-3"
+                  sx={{
+                    width: "100%",
+                    paddingY: "12px",
+                  }}
                   type="submit"
-                  disabled={!isValid}
+                  disabled={!isValid || isLoading}
+                  startIcon={
+                    isLoading && <CircularProgress size={20} color="inherit" />
+                  }
                 >
                   Sign In
                 </Button>
