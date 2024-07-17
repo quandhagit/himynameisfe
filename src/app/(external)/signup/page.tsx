@@ -2,7 +2,7 @@
 
 import { UserRegisterInputType, useUserRegisterMutation } from "@/api/auth";
 import Input from "@/components/common/Input";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import signUpBg from "public/images/signUpBg.jpg";
@@ -29,7 +29,7 @@ const Signup: React.FC = () => {
     formState: { isValid },
   } = form;
 
-  const { mutate } = useUserRegisterMutation();
+  const { mutate, isPending } = useUserRegisterMutation();
 
   const signUp = async (data: UserRegisterInputType) => {
     mutate(data, {
@@ -126,9 +126,15 @@ const Signup: React.FC = () => {
                 <Button
                   variant="contained"
                   size="large"
-                  className="w-full py-3"
+                  sx={{
+                    width: "100%",
+                    paddingY: "12px",
+                  }}
                   type="submit"
-                  disabled={!isValid}
+                  disabled={!isValid || isPending}
+                  startIcon={
+                    isPending && <CircularProgress size={20} color="inherit" />
+                  }
                 >
                   Sign Up
                 </Button>
