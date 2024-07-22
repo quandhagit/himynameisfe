@@ -1,5 +1,5 @@
 import Dialog from "@/components/common/Dialog";
-import { Project } from "@/redux/home/project/projectSlice";
+import { Project } from "@/dataflow/home/project/projectSlice";
 import React, { useMemo } from "react";
 
 type ProjectDialogProps = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { DUMB_IMAGE_URL } from "@/constant/common";
-import { Project } from "@/redux/home/project/projectSlice";
+import { Project } from "@/dataflow/home/project/projectSlice";
 import moment from "moment";
 import Image from "next/image";
 import React, { useCallback, useMemo } from "react";

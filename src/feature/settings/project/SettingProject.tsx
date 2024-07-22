@@ -1,10 +1,10 @@
 "use client";
 
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector } from "@/dataflow/store";
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import SettingProjectCard from "./SettingProjectCard";
-import { selectProject } from "@/redux/home/project/projectSlice";
+import { selectProject } from "@/dataflow/home/project/projectSlice";
 import SettingProjectDialog from "./SettingProjectDialog";
 
 const SettingProject: React.FC = () => {

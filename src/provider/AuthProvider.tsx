@@ -5,6 +5,7 @@ import { auth } from "@/config/firebase";
 import { signInWithCustomToken } from "firebase/auth";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type AuthProviderProps = {
@@ -29,6 +30,7 @@ export const useAuthContext = () => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const session = useSession();
+  const route = useRouter();
   const [status, setStatus] = useState(session.status);
 
   const { data: userData, isLoading } = useUserQuery(session.data?.id);
@@ -39,9 +41,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (session && session.status === "authenticated") {
-      signInWithCustomToken(auth, session.data.customToken).then(() => {
-        setStatus("authenticated");
-      });
+      signInWithCustomToken(auth, session.data.customToken)
+        .then(() => {
+          setStatus("authenticated");
+        })
+        .catch(() => {
+          route.push("/login");
+        });
     }
   }, [session]);
 

@@ -1,4 +1,4 @@
-import { Workspace } from "@/redux/home/workspace/workspaceSlice";
+import { Workspace } from "@/dataflow/home/workspace/workspaceSlice";
 import clsx from "clsx";
 import React, { useCallback, useMemo } from "react";
 

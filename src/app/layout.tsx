@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ApolloProviders from "@/apollo/components/ApolloProviders";
 import ThemeRegistry from "@/provider/themeCustom/ThemeRegistry";
 import { Poppins } from "next/font/google";
-import ReduxProvider from "@/redux/ReduxProvider";
+import ReduxProvider from "@/dataflow/ReduxProvider";
 import ReactQueryProvider from "@/provider/reactQuery/ReactQueryProvider";
 import { Suspense } from "react";
 import SessionProvider from "@/components/providers/SessionProvider";

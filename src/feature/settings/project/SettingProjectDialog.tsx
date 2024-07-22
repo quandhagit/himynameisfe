@@ -2,7 +2,7 @@
 
 import Dialog from "@/components/common/Dialog";
 import Input from "@/components/common/Input";
-import { Project } from "@/redux/home/project/projectSlice";
+import { Project } from "@/dataflow/home/project/projectSlice";
 import { Button } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";

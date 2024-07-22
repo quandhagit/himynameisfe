@@ -3,8 +3,8 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import WorkspaceCard from "./WorkspaceCard";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { selectWorkspace } from "@/redux/home/workspace/workspaceSlice";
+import { AppDispatch, useAppSelector } from "@/dataflow/store";
+import { selectWorkspace } from "@/dataflow/home/workspace/workspaceSlice";
 import WorkspaceDialog from "./WorkspaceDialog";
 
 const WorkspaceList: React.FC = () => {

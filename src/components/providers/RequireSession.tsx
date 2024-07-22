@@ -1,6 +1,7 @@
 "use client";
 
 import { auth } from "@/config/firebase";
+import { useAuthContext } from "@/provider/AuthProvider";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,7 +10,7 @@ export const RequireSession: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const route = useRouter();
-  const { data: session, status } = useSession();
+  const { data: session, status } = useAuthContext();
 
   const [emailVerified, setEmailVerified] = useState(false);
 
@@ -31,7 +32,6 @@ export const RequireSession: React.FC<{ children: React.ReactNode }> = ({
     if (status === "unauthenticated") {
       // saveCurrentUrlForNextLogin();
       route.push("/login");
-      console.log("hey");
     }
 
     return () => {

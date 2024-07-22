@@ -1,7 +1,7 @@
 "use client";
 
 import { DUMB_IMAGE_URL } from "@/constant/common";
-import { Workspace } from "@/redux/home/workspace/workspaceSlice";
+import { Workspace } from "@/dataflow/home/workspace/workspaceSlice";
 import Image from "next/image";
 import React, { useCallback, useMemo } from "react";
 
