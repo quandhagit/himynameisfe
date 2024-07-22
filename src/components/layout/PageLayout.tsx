@@ -1,20 +1,20 @@
 "use client";
 
 import { PageLayoutType } from "@/app/layout";
-import { useSession } from "next-auth/react";
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useAuthContext } from "@/provider/AuthProvider";
 
 const PageLayout: React.FC<{
   children: React.ReactNode;
   layout: PageLayoutType;
 }> = ({ children, layout }) => {
-  const { data: session } = useSession();
+  const { data } = useAuthContext();
 
   switch (layout) {
     case "InternalLayout": {
-      if (session?.user) {
+      if (data) {
         return (
           <>
             <Header />
