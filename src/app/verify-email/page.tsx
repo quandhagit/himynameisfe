@@ -1,32 +1,30 @@
 "use client";
 
 import PageLayout from "@/components/layout/PageLayout";
+import { auth } from "@/config/firebase";
+import SendEmailVerification from "@/feature/auth/SendEmailVerification";
+import VerifyEmail from "@/feature/auth/VerifyEmail";
 import { useAuthContext } from "@/provider/AuthProvider";
-import { Button } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 
-const VerifyEmail: React.FC = () => {
-  const { data } = useAuthContext();
+const VerifyEmailPage: React.FC = () => {
+  const searchParams = useSearchParams();
+  const { isLoading } = useAuthContext();
+  const mode = searchParams.get("mode");
+  const oobCode = String(searchParams.get("oobCode"));
+
+  if (!mode && (isLoading || auth.currentUser?.emailVerified)) {
+    return <></>;
+  }
 
   return (
     <PageLayout layout={"InternalLayout"}>
-      <div className="flex h-screen relative">
-        <div className="py-4 px-6 flex flex-col items-center justify-center w-full gap-2">
-          <div className="flex flex-col items-center justify-center">
-            <h1>Please verify your email</h1>
-            <div>You're almost there! We send an email to</div>
-            <div>{data?.email || ""}</div>
-            <div>
-              Just click on the link in that email to complete your signup
-            </div>
-            <div>
-              If you don't see it, you may need to check your spam folder
-            </div>
-            <div>Still can't find the email?</div>
-          </div>
-          <Button>Resend Email</Button>
-        </div>
-      </div>
+      {mode === "verifyEmail" ? (
+        <VerifyEmail oobCode={oobCode} />
+      ) : (
+        <SendEmailVerification />
+      )}
     </PageLayout>
   );
 };
-export default VerifyEmail;
+export default VerifyEmailPage;

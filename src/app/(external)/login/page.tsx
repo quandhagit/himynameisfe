@@ -35,7 +35,7 @@ const Home: React.FC = () => {
       email,
       password,
       redirect: true,
-      callbackUrl: "/",
+      callbackUrl: "/verify-email",
     }).finally(() => {
       setLoading(false);
     });

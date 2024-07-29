@@ -56,6 +56,7 @@ const Header: React.FC = () => {
   const handleLogout = useCallback(async () => {
     await signOut();
     await auth.signOut();
+    router.push("/login");
   }, []);
 
   useEffect(() => {

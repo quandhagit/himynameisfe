@@ -7,13 +7,7 @@ import { User } from "@/models/home";
 import { signInWithCustomToken } from "firebase/auth";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type AuthProviderProps = {
   children: React.ReactNode;
@@ -44,8 +38,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { user, initCurrentUser } = useMeData();
   const [status, setStatus] = useState(session.status);
   const [emailVerified, setEmailVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: userData, isLoading, refetch } = useUserQuery(session.data?.id);
+  const {
+    data: userData,
+    isLoading: isLoadingUserData,
+    refetch,
+  } = useUserQuery(session.data?.id);
+
+  const isVerifyEmail = pathname === "/verify-email";
 
   useEffect(() => {
     if (!userData) return;
@@ -56,12 +57,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (!session) return;
 
     if (!auth.currentUser && session.status === "authenticated") {
+      setIsLoading(true);
       signInWithCustomToken(auth, session.data.customToken)
         .then(() => {
           setStatus("authenticated");
         })
         .catch(() => {
           route.push("/login");
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
 
@@ -76,17 +81,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return;
       }
       setEmailVerified(user.emailVerified);
-      if (userData && !user.emailVerified) {
+      if (userData && !user.emailVerified && !isVerifyEmail) {
         route.push("/verify-email");
+      }
+      if (user.emailVerified) {
+        route.push("/");
       }
     });
 
     return () => {
       unsubscribe();
     };
-  }, [userData]);
+  }, [userData, pathname]);
 
-  if (auth.currentUser && !emailVerified && pathname !== "/verify-email") {
+  if (session.data && !emailVerified && !isVerifyEmail) {
     return null;
   }
 
@@ -96,7 +104,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         data: user,
         refetchUserData: refetch,
         status,
-        isLoading,
+        isLoading: isLoadingUserData || isLoading,
       }}
     >
       {children}
