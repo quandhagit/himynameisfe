@@ -6,13 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import signUpBg from "public/images/signUpBg.jpg";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
-
-type UserLogin = { email: string; password: string };
+import { useMutation } from "@tanstack/react-query";
+import { UserLoginType, useAuthContext } from "@/provider/AuthProvider";
 
 const Home: React.FC = () => {
-  const form = useForm<UserLogin>({
+  const form = useForm<UserLoginType>({
     mode: "onBlur",
     reValidateMode: "onBlur",
     defaultValues: {
@@ -21,25 +19,18 @@ const Home: React.FC = () => {
     },
   });
 
+  const { loginWithEmailPassword } = useAuthContext();
+
   const {
     handleSubmit,
     formState: { isValid },
   } = form;
 
-  const [isLoading, setLoading] = useState(false);
-
-  const login = async (data: UserLogin) => {
-    const { email, password } = data;
-    setLoading(true);
-    await signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-      callbackUrl: "/verify-email",
-    }).finally(() => {
-      setLoading(false);
-    });
-  };
+  const { isPending, mutateAsync: mutateSignIn } = useMutation({
+    mutationFn: async ({ email, password }: UserLoginType) => {
+      await loginWithEmailPassword({ email, password });
+    },
+  });
 
   return (
     <div className="flex h-screen relative">
@@ -63,7 +54,7 @@ const Home: React.FC = () => {
           <FormProvider {...form}>
             <form
               onSubmit={handleSubmit((data) => {
-                login(data);
+                mutateSignIn(data);
               })}
               className="flex flex-col gap-4 mt-10"
             >
@@ -94,9 +85,9 @@ const Home: React.FC = () => {
                     paddingY: "12px",
                   }}
                   type="submit"
-                  disabled={!isValid || isLoading}
+                  disabled={!isValid || isPending}
                   startIcon={
-                    isLoading && <CircularProgress size={20} color="inherit" />
+                    isPending && <CircularProgress size={20} color="inherit" />
                   }
                 >
                   Sign In
