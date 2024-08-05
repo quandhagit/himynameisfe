@@ -4,24 +4,22 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "./Sidebar";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { HOME_MENU_IDS } from "@/constant/home/common";
 import useMatchMedia from "@/utils/useMatchMedia";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import useDetectScroll from "@/utils/useDetectScrollOnTop";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import AppLogo from "../AppLogo";
 import { useAuthContext } from "@/provider/AuthProvider";
-import { auth } from "@/config/firebase";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
   const { isScrollOnTop } = useDetectScroll();
   const router = useRouter();
   const pathname = usePathname();
-  const { data: session } = useAuthContext();
+  const { data: user, signOut } = useAuthContext();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
@@ -77,9 +75,9 @@ const Header: React.FC = () => {
             <div className="lg:flex gap-10 hidden font-bold">{tabElements}</div>
           </div>
           <div className="hidden lg:flex">
-            {session && session.user ? (
+            {user ? (
               <div className="flex items-center gap-4">
-                <div>{`${session.user.lastName} ${session.user.firstName}`}</div>
+                <div>{`${user.lastName} ${user.firstName}`}</div>
                 <Button
                   variant="contained"
                   size="large"
@@ -87,10 +85,7 @@ const Header: React.FC = () => {
                     backgroundColor: "black",
                     ":hover": { opacity: 0.8, backgroundColor: "black" },
                   }}
-                  onClick={() => {
-                    signOut();
-                    auth.signOut();
-                  }}
+                  onClick={signOut}
                 >
                   Logout
                 </Button>
