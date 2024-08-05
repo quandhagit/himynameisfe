@@ -16,6 +16,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import Loading from "@/components/common/Loading";
 
 type AuthProviderProps = {
   children: React.ReactNode;
@@ -72,9 +73,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isVerifyEmail = pathname === "/verify-email";
 
   const signOut = useCallback(async () => {
-    await signOutNextAuth();
     await auth.signOut();
-    route.push("/login");
+    await signOutNextAuth({ callbackUrl: "/login" });
   }, [auth]);
 
   const loginWithEmailPassword = useCallback(
@@ -128,7 +128,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isUserDataLoading ||
     (session.data && !emailVerified && !isVerifyEmail)
   ) {
-    return null;
+    return <Loading />;
   }
 
   return (
