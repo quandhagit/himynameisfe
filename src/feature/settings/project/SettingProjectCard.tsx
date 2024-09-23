@@ -21,8 +21,6 @@ const SettingProjectCard: React.FC<SettingProjectCardProps> = ({
     endDate,
     description,
     projectName,
-    image,
-    referUrl,
     technologies,
   } = project;
 

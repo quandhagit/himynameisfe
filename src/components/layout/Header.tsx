@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import Sidebar from "./Sidebar";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { HOME_MENU_IDS } from "@/constant/home/common";
 import useMatchMedia from "@/utils/useMatchMedia";
 import { usePathname } from "next/navigation";
