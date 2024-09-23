@@ -1,7 +1,7 @@
 "use client";
 
 import { AppDispatch, useAppSelector } from "@/dataflow/store";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import SettingProjectCard from "./SettingProjectCard";
 import { selectProject } from "@/dataflow/home/project/projectSlice";

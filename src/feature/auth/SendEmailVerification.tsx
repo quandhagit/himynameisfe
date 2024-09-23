@@ -46,7 +46,7 @@ const SendEmailVerification: React.FC = () => {
         alert(e);
         setResendCount(0);
       });
-  }, [auth.currentUser, isLoading, countDownResend]);
+  }, [auth.currentUser, isLoading, countDownResend, route]);
 
   useEffect(() => {
     if (isLoading) return;

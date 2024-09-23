@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signOut = useCallback(async () => {
     await auth.signOut();
     await signOutNextAuth({ callbackUrl: "/login" });
-  }, [auth]);
+  }, []);
 
   const loginWithEmailPassword = useCallback(
     async ({ email, password }: UserLoginType) => {
@@ -92,7 +92,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     if (!userData) return;
     initCurrentUser(userData);
-  }, [userData]);
+  }, [userData, initCurrentUser]);
 
   useEffect(() => {
     if (!session) return;
@@ -104,7 +104,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (session.status !== "authenticated") {
       setStatus(session.status);
     }
-  }, [session]);
+  }, [session, mutateSignInWithCustomToken]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -120,7 +120,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [userData, pathname, isVerifyEmail]);
+  }, [userData, pathname, isVerifyEmail, route]);
 
   if (
     isSessionLoading ||
