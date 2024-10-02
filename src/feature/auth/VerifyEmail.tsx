@@ -18,6 +18,12 @@ const VerifyEmail: React.FC<IProps> = ({ oobCode }) => {
     mutationFn: async () => {
       await applyActionCode(auth, oobCode);
     },
+    onSuccess: () => {
+      auth.currentUser?.reload().then(() => {
+        // After reload, onAuthStateChanged should be triggered
+        console.log("User reloaded, auth state should update.");
+      });
+    },
     onError: () => {},
   });
 
