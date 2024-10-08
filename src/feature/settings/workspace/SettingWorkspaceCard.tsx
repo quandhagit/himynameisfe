@@ -1,7 +1,7 @@
 "use client";
 
 import { DUMB_IMAGE_URL } from "@/constant/common";
-import { Workspace } from "@/redux/home/workspace/workspaceSlice";
+import { Workspace } from "@/dataflow/home/workspace/workspaceSlice";
 import Image from "next/image";
 import React, { useCallback, useMemo } from "react";
 
@@ -47,14 +47,14 @@ const SettingWorkspaceCard: React.FC<SettingWorkspaceCardProps> = ({
         alt="exp"
         width={200}
         height={150}
-        className="rounded hidden sm:inline"
+        className="rounded hidden sm:inline min-h-full"
       />
-      <div className="w-full">
-        <div className="flex justify-between w-full">
+      <div className="w-full flex flex-col gap-2">
+        <div className="flex justify-between items-center w-full">
           <div className="">{company}</div>
           <div className="text-yellow-600">{workDateRange}</div>
         </div>
-        <div className="text-xl mt-2 text-blue-950 font-semibold">{role}</div>
+        <div className="text-xl text-blue-950 font-semibold">{role}</div>
         <div className="mt-2 text-gray-600 line-clamp-3 w-full">
           {description}
         </div>

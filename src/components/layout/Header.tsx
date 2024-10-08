@@ -10,11 +10,16 @@ import useMatchMedia from "@/utils/useMatchMedia";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import useDetectScroll from "@/utils/useDetectScrollOnTop";
+import { useRouter } from "next/navigation";
+import AppLogo from "../AppLogo";
+import { useAuthContext } from "@/provider/AuthProvider";
 
 const Header: React.FC = () => {
   const isMiddleScreen = useMatchMedia("(min-width: 1024px)");
   const { isScrollOnTop } = useDetectScroll();
+  const router = useRouter();
   const pathname = usePathname();
+  const { data: user, signOut } = useAuthContext();
 
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
 
@@ -24,25 +29,13 @@ const Header: React.FC = () => {
     return (
       <>
         <Link className="no-underline text-black hover:text-red-600" href={"/"}>
-          Profile
+          Blogs
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
           href={"/settings"}
         >
           Settings
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"/settings"}
-        >
-          Dashboard
-        </Link>
-        <Link
-          className="no-underline text-black hover:text-red-600"
-          href={"/daily"}
-        >
-          Daily
         </Link>
         <Link
           className="no-underline text-black hover:text-red-600"
@@ -77,29 +70,43 @@ const Header: React.FC = () => {
         )}
       >
         <div className="flex items-center gap-3 justify-between w-full">
-          <Link className="text-3xl font-bold mr-2 no-underline" href={"/"}>
-            <div className="text-red-700 font-mono">
-              Hi
-              <span className="text-white bg-red-700 px-3 rounded">
-                MyNameIs
-              </span>
-            </div>
-          </Link>
-          <div className="lg:flex xl:max-w-[50%] gap-6 w-3/5 hidden justify-between font-bold">
-            {tabElements}
+          <div className="flex items-center gap-10">
+            <AppLogo />
+            <div className="lg:flex gap-10 hidden font-bold">{tabElements}</div>
           </div>
           <div className="hidden lg:flex">
-            <Button
-              variant="contained"
-              size="large"
-              sx={{
-                backgroundColor: "black",
-                ":hover": { opacity: 0.8, backgroundColor: "black" },
-              }}
-            >
-              Login
-            </Button>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <div>{`${user.lastName} ${user.firstName}`}</div>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    backgroundColor: "black",
+                    ":hover": { opacity: 0.8, backgroundColor: "black" },
+                  }}
+                  onClick={signOut}
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  backgroundColor: "black",
+                  ":hover": { opacity: 0.8, backgroundColor: "black" },
+                }}
+                onClick={() => {
+                  router.push("/login");
+                }}
+              >
+                Login
+              </Button>
+            )}
           </div>
+
           <button
             className="cursor-pointer flex lg:hidden border-none hover:bg-red-100 rounded bg-transparent"
             onClick={() => {

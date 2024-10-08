@@ -29,7 +29,7 @@ const HomeTableOfContents = () => {
   }, []);
 
   return (
-    <div className="group hover:w-52 hover:h-[216px] hover:rounded-md fixed w-14 h-14 top-1/4 left-6 overflow-hidden bg-opacity-30 p-4 bg-black flex flex-col rounded-md xl:w-52 xl:h-[216px] transition-all duration-300">
+    <div className="z-50 group hover:w-52 hover:h-[216px] hover:rounded-md fixed w-14 h-14 top-1/4 left-6 overflow-hidden bg-opacity-30 p-4 bg-black flex flex-col rounded-md xl:w-52 xl:h-[216px] transition-all duration-300">
       <div className="xl:hidden group-hover:hidden">
         <WidgetsIcon className="text-white" />
       </div>

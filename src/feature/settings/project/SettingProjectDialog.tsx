@@ -2,24 +2,30 @@
 
 import Dialog from "@/components/common/Dialog";
 import Input from "@/components/common/Input";
-import { Workspace } from "@/dataflow/home/workspace/workspaceSlice";
+import { Project } from "@/dataflow/home/project/projectSlice";
 import { Button } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-type SettingWorkspaceDialogProps = {
-  workspace: Workspace;
+type SettingProjectDialogProps = {
+  project: Project;
   isOpen?: boolean;
   onClose?: () => void;
 };
 
-const SettingWorkspaceDialog: React.FC<SettingWorkspaceDialogProps> = (
-  props
-) => {
-  const { workspace, isOpen = false, onClose } = props;
+const SettingProjectDialog: React.FC<SettingProjectDialogProps> = (props) => {
+  const { project, isOpen = false, onClose } = props;
 
-  const { startDate, endDate, company, role, description, image, id } =
-    workspace;
+  const {
+    startDate,
+    endDate,
+    projectName,
+    referUrl,
+    technologies,
+    description,
+    image,
+    id,
+  } = project;
 
   const {
     handleSubmit,
@@ -32,8 +38,9 @@ const SettingWorkspaceDialog: React.FC<SettingWorkspaceDialogProps> = (
     defaultValues: {
       startDate,
       endDate,
-      company,
-      role,
+      projectName,
+      referUrl,
+      technologies,
       description,
       image,
     },
@@ -93,16 +100,23 @@ const SettingWorkspaceDialog: React.FC<SettingWorkspaceDialogProps> = (
             />
           </div>
           <Input
-            registerName="company"
-            label="Company"
-            placeholder="Enter your company"
+            registerName="projectName"
+            label="Project Name"
+            placeholder="Enter your project name"
             control={control}
             required
           />
           <Input
-            registerName="role"
-            label="Role"
-            placeholder="Enter your work role"
+            registerName="referUrl"
+            label="Referrence"
+            placeholder="Enter your project referrence"
+            control={control}
+            required
+          />
+          <Input
+            registerName="technologies"
+            label="Technologies"
+            placeholder="Enter your project technologies"
             control={control}
             required
           />
@@ -120,4 +134,4 @@ const SettingWorkspaceDialog: React.FC<SettingWorkspaceDialogProps> = (
   );
 };
 
-export default SettingWorkspaceDialog;
+export default SettingProjectDialog;

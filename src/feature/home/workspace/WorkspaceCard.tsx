@@ -1,4 +1,4 @@
-import { Workspace } from "@/redux/home/workspace/workspaceSlice";
+import { Workspace } from "@/dataflow/home/workspace/workspaceSlice";
 import clsx from "clsx";
 import React, { useCallback, useMemo } from "react";
 
@@ -43,13 +43,13 @@ const WorkspaceCard: React.FC<WorkspaceCardProps> = ({
       {index !== 0 && (
         <div
           className={clsx(
-            "h-[1px] w-20 bg-orange-400 absolute",
+            "bg-orange-400 absolute",
             (index % 4 === 0 || index % 4 === 2) &&
-              "mx-auto top-0 left-0 right-0 -translate-y-10 rotate-90",
+              "mx-auto top-0 left-0 right-0 -translate-y-20 w-px h-20",
             index % 4 === 1 &&
-              "mx-auto top-0 left-0 right-0 -translate-y-10 rotate-90 md:right-auto md:bottom-0 md:my-auto md:-translate-y-0 md:-translate-x-20 md:rotate-0",
+              "w-px h-20 md:h-px md:w-20 mx-auto top-0 left-0 right-0 -translate-y-20 md:right-auto md:bottom-0 md:my-auto md:-translate-y-0 md:-translate-x-20 md:rotate-0",
             index % 4 === 3 &&
-              "mx-auto top-0 left-0 right-0 -translate-y-10 rotate-90 md:left-auto md:bottom-0 md:my-auto md:-translate-y-0 md:translate-x-20 md:rotate-0"
+              "w-px h-20 md:h-px md:w-20 mx-auto top-0 left-0 right-0 -translate-y-20 md:left-auto md:bottom-0 md:my-auto md:-translate-y-0 md:translate-x-20 md:rotate-0"
           )}
         ></div>
       )}

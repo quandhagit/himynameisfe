@@ -9,6 +9,7 @@ import {
   useFormContext,
 } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import moment from "moment";
 
 type InputProps<FieldValueType extends FieldValues> = {
   label: string;
@@ -109,12 +110,20 @@ function Input<FieldValueType extends FieldValues>(
         {required && <span className="text-red-600 ml-0.5">*</span>}
       </div>
       <Controller
-        control={form?.control}
+        control={form?.control || control}
         name={registerName}
         disabled={isDisabled}
         rules={{
           required: { value: required, message: `${label} is required!` },
           pattern: { value: pattern, message: validationErrorMessage },
+          validate: (value) => {
+            if (registerName !== "confirmPassword") {
+              return true;
+            }
+            return (
+              value === form.watch("password") || "Password does not match"
+            );
+          },
         }}
         render={({ field: { onChange, value, onBlur } }) => {
           return (
@@ -125,7 +134,9 @@ function Input<FieldValueType extends FieldValues>(
               multiline={multiline}
               rows={rows}
               size="small"
-              value={value}
+              value={
+                type === "date" ? moment(value).format("YYYY-MM-DD") : value
+              }
               type={type}
               inputProps={inputProps}
               placeholder={placeholder}

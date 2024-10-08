@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import React, { useCallback } from "react";
 import ProjectCard from "./ProjectCard";
 import { Pagination, Stack } from "@mui/material";
-import { AppDispatch, useAppSelector } from "@/redux/store";
-import { selectProject } from "@/redux/home/project/projectSlice";
+import { AppDispatch, useAppSelector } from "@/dataflow/store";
+import { selectProject } from "@/dataflow/home/project/projectSlice";
 import ProjectDialog from "./ProjectDialog";
 
 const ProjectList: React.FC = () => {

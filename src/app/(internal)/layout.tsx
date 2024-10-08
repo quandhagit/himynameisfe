@@ -1,11 +1,13 @@
-import HomePage from "@/components/home/HomePage";
 import PageLayout from "@/components/layout/PageLayout";
 
-const Home: React.FC = () => {
+export default function InternalLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <PageLayout layout={"InternalLayout"}>
-      <HomePage />
+      <>{children}</>
     </PageLayout>
   );
-};
-export default Home;
+}

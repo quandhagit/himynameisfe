@@ -1,24 +1,27 @@
+"use client";
+
+import { DUMB_IMAGE_URL } from "@/constant/common";
 import { Project } from "@/dataflow/home/project/projectSlice";
 import moment from "moment";
 import Image from "next/image";
 import React, { useCallback, useMemo } from "react";
 
-type ProjectCardProps = {
+type SettingProjectCardProps = {
   project: Project;
   onClick: (id: string) => void;
 };
 
-const ProjectCard: React.FC<ProjectCardProps> = (props) => {
-  const { project, onClick } = props;
-
+const SettingProjectCard: React.FC<SettingProjectCardProps> = ({
+  project,
+  onClick,
+}) => {
   const {
+    id: projectId,
     startDate,
     endDate,
-    projectName,
     description,
+    projectName,
     technologies,
-    image,
-    id: projectId,
   } = project;
 
   const workingTime = useMemo(() => {
@@ -35,34 +38,31 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
     return duration + " months";
   }, [startDate, endDate]);
 
-  const handleSelectProject = useCallback(() => {
+  const handleCardClick = useCallback(() => {
     onClick(projectId);
   }, [projectId, onClick]);
 
   return (
     <div
-      className="rounded-md fix-border relative h-auto min-h-[400px] overflow-hidden shadow-md hover:-translate-y-3 transition cursor-pointer"
-      onClick={handleSelectProject}
+      className="p-3 flex gap-4 border rounded border-gray-200 border-solid bg-white relative cursor-pointer shadow-sm hover:ring-1 ring-red-600"
+      onClick={handleCardClick}
     >
-      <div className="absolute text-sm top-0 right-0 py-1 px-2 rounded-bl-md bg-blue-100 text-gray-800 font-medium">
-        {workingTime}
-      </div>
       <Image
-        alt="abc"
-        src={image}
-        width={0}
-        height={0}
-        sizes="100vw"
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-        }}
+        src={DUMB_IMAGE_URL}
+        alt="exp"
+        width={200}
+        height={150}
+        className="rounded hidden sm:inline min-h-full"
       />
-      <div className="absolute bottom-0 h-auto min-h-[140px] bg-white w-full p-4">
-        <div className="text-lg font-bold text-blue-950">{projectName}</div>
-        <div className="md:line-clamp-2 line-clamp-3 mt-2">{description}</div>
-        <div className="mt-4 flex gap-2 flex-wrap">
+      <div className="w-full flex flex-col gap-2">
+        <div className="flex justify-between items-center w-full">
+          <div className="text-xl mt-2 text-blue-950 font-semibold">
+            {projectName}
+          </div>
+          <div className="text-yellow-600">{workingTime}</div>
+        </div>
+        <div className=" text-gray-600 line-clamp-3 w-full">{description}</div>
+        <div className="flex gap-2 flex-wrap">
           {technologies.map((tech) => {
             return (
               <div
@@ -79,4 +79,4 @@ const ProjectCard: React.FC<ProjectCardProps> = (props) => {
   );
 };
 
-export default ProjectCard;
+export default SettingProjectCard;
