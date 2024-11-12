@@ -17,7 +17,7 @@ const IntroductionContent = () => {
       </div>
       <div className="mt-7">
         <div className="text-base  text-blue-950">
-          I&apos;m a Vietnamese front‑end developer with <br /> 1.5 years of
+          I&apos;m a Vietnamese front‑end developer with <br /> 2.5 years of
           experience
         </div>
       </div>
