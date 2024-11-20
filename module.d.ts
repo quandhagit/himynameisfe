@@ -1,6 +1,6 @@
 declare namespace NodeJS {
   export interface ProcessEnv {
-    BACKEND_URL: string;
+    NEXT_PUBLIC_BACKEND_URL: string;
     NEXT_PUBLIC_FIREBASE_API_KEY: string;
     NEXT_PUBLIC_AUTH_DOMAIN: string;
     NEXT_PUBLIC_PROJECT_ID: string;

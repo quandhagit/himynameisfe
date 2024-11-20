@@ -7,7 +7,7 @@ const getCustomToken = async (
   id: string,
   accessToken: string
 ): Promise<string> => {
-  const res = await fetch("http://localhost:8080/auth/" + id, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/` + id, {
     method: "GET",
     headers: {
       authorization: `Bearer ${accessToken}`,
@@ -59,6 +59,8 @@ export const authOptions: NextAuthOptions = {
           userCredential.uid,
           accessToken
         );
+
+        console.log(customToken);
 
         return {
           id: userCredential.uid,
